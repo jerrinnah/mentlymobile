@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ImageBackground, Pressable, Button } from 'react-native';
 import { useFonts } from 'expo-font';
-import Colors from '../../../utils/Colors';
-import Header from '../../../utils/Header';
-import SmallText from '../../../utils/SmallText';
+import Colors from '../../utils/Colors';
+import Header from '../../utils/Header';
+import SmallText from '../../utils/SmallText';
 
 // const imgBg = '../../../res/images/whiteBg.png';
 
@@ -15,14 +15,14 @@ const Unboarding = ({ navigation }) => {
     navigation.navigate('Unboarding2')
 }
   
-  const [loaded] = useFonts({
-    Montserrat: require('../../../assets/fonts/Montserrat.ttf'),
-    Nunito_Sans: require('../../../assets/fonts/Nunito_Sans.ttf'),
-  });
+  // const [loaded] = useFonts({
+  //   Montserrat: require('../../../assets/fonts/Montserrat.ttf'),
+  //   Nunito_Sans: require('../../../assets/fonts/Nunito_Sans.ttf'),
+  // });
 
-  if (!loaded) {
-    return null;
-  }
+  // if (!loaded) {
+  //   return null;
+  // }
 
 
   
@@ -33,7 +33,7 @@ const Unboarding = ({ navigation }) => {
         <View style={styles.imgContainer}>
           <Image
             style={styles.lady}
-            source={require('../../../res/images/lady1.png')}
+            source={require('../../res/images/lady1.png')}
           />
         </View>
 
@@ -50,7 +50,7 @@ const Unboarding = ({ navigation }) => {
           <Pressable onPress={pressHandler}>
           <Image
             style={styles.nextIcon}
-            source={require('../../../res/icons/nextFlow.png')}
+            source={require('../../res/icons/nextFlow.png')}
           />
           </Pressable>
          

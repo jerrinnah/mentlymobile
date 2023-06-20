@@ -11,14 +11,14 @@ const Unboarding2 = ({ navigation }) => {
     navigation.navigate('Unboarding3');
   };
 
-  const [loaded] = useFonts({
-    Montserrat: require('../../../assets/fonts/Montserrat.ttf'),
-    Nunito_Sans: require('../../../assets/fonts/Nunito_Sans.ttf'),
-  });
+  // const [loaded] = useFonts({
+  //   Montserrat: require('../../../assets/fonts/Montserrat.ttf'),
+  //   Nunito_Sans: require('../../../assets/fonts/Nunito_Sans.ttf'),
+  // });
 
-  if (!loaded) {
-    return null;
-  }
+  // if (!loaded) {
+  //   return null;
+  // }
 
   return (
     <>

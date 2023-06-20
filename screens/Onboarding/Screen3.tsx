@@ -1,33 +1,22 @@
-import React from 'react'
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
-import Header from '../../../utils/Header';
-import SmallText from '../../../utils/SmallText';
-import Colors from '../../../utils/Colors';
-import { useFonts } from 'expo-font';
+import React from 'react'
+import Header from '../../utils/Header'
+import SmallText from '../../utils/SmallText'
+import Colors from '../../utils/Colors'
 
-const Unboarding3 = () => {
 
+const Screen3 = ({setPage, navigation}) => {
 
     const pressHandler = () => {
-        navigation.navigate('Unboarding3');
+        navigation.navigate('SignIn');
       };
-    
-    //   const [loaded] = useFonts({
-    //     Montserrat: require('../../../assets/fonts/Montserrat.ttf'),
-    //     Nunito_Sans: require('../../../assets/fonts/Nunito_Sans.ttf'),
-    //   });
-    
-    //   if (!loaded) {
-    //     return null;
-    //   }
-
   return (
-    <>
-      <View style={styles.container}>
+    <View>
+       <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image
             style={styles.lady}
-            source={require('../../../res/images/lady3.png')}
+            source={require('../../res/images/lady3.png')}
           />
         </View>
 
@@ -35,22 +24,24 @@ const Unboarding3 = () => {
           <View style={styles.textInfo}>
             <Header style={styles.headerText}>Examination</Header>
             <SmallText style={styles.paragraph}>
-            Get access to valuable resources, exam tips, and personalized advice to help you succeed
+              Get access to valuable resources, exam tips, and personalized
+              advice to help you succeed
             </SmallText>
           </View>
-          <Pressable onPress={pressHandler}>
+          <Pressable onPress={(pressHandler)}>
             <Image
               style={styles.nextIcon}
-              source={require('../../../res/icons/nextFlow.png')}
+              source={require('../../res/icons/nextFlow.png')}
             />
           </Pressable>
         </View>
       </View>
-    </>
+    </View>
   )
 }
 
-export default Unboarding3
+export default Screen3
+
 
 const styles = StyleSheet.create({
     container: {
@@ -101,7 +92,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
       fontStyle: 'normal',
-      fontWeight: 200,
+      fontWeight: '200',
     },
     paragraph: {
       top: 20,
@@ -112,14 +103,12 @@ const styles = StyleSheet.create({
   
     lady: {
       width: 387,
-      height: 290,
+      height: 329,
       top: 50,
     },
     nextIcon: {
       height: 63,
       width: 63,
     },
-  
-   
   });
   
