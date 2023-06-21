@@ -3,6 +3,8 @@ import React from 'react'
 import Header from '../../utils/Header'
 import SmallText from '../../utils/SmallText'
 import Colors from '../../utils/Colors'
+import BigText from '../../components/SmallText/BigText'
+import RegularText from '../../components/SmallText/RegularText'
 
 
 const Screen2 = ({setPage}) => {
@@ -18,12 +20,15 @@ const Screen2 = ({setPage}) => {
 
         <View style={styles.textContainer}>
           <View style={styles.textInfo}>
-            <Header style={styles.headerText}>Learning!!</Header>
-            <SmallText style={styles.paragraph}>
-              Expand your horizons and acquire new skills through mentorship.
+            <BigText>Learning</BigText>
+            {/* <Header style={styles.headerText}>Learning!!</Header> */}
+
+            <RegularText>
+            Expand your horizons and acquire new skills through mentorship.
               Learn from experienced mentors who can guide you towards growth,
               knowledge, and self-improvement.
-            </SmallText>
+            </RegularText>
+            
           </View>
           <Pressable onPress={() => setPage(2)}>
             <Image

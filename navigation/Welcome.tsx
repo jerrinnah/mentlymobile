@@ -16,34 +16,6 @@ const Welcome = ({ setPage }: { setPage: (val: number) => void }) => {
   // };
   
   return (
-    // <View style={styles.container}>
-    //   <View style={styles.imgContainer}>
-    //     <Image
-    //       style={styles.lady}
-    //       source={require('../res/images/lady1.png')}
-    //     />
-    //   </View>
-
-    //   <View style={styles.textContainer}>
-    //     <View style={styles.textInfo}>
-    //       <Header style={styles.headerText}>Teaching</Header>
-    //       <SmallText style={styles.paragraph}>
-    //         Share your knowledge and experiences to inspire, and equip mentees
-    //         to reach their career goals. Join our mentorship community and start
-    //         your journey to making a difference by providing guidance and
-    //         support.
-    //       </SmallText>
-    //     </View>
-    //     <Pressable onPress={() => setPage(1)}>
-    //       <Image
-    //         style={styles.nextIcon}
-    //         source={require('../res/icons/nextFlow.png')}
-    //       />
-    //     </Pressable>
-    //   </View>
-
-    //   {/* <Button title='Goto 2' onPress={() => setPage(1)} /> */}
-    // </View>
     <View>
       <Screen1 setPage={setPage}/>
     </View>
@@ -53,34 +25,6 @@ const Welcome = ({ setPage }: { setPage: (val: number) => void }) => {
 const Welcome2 = ({ setPage }: { setPage: (val: number) => void }) => {
   return (
     <View>
-      {/* <View style={styles.container}>
-        <View style={styles.imgContainer}>
-          <Image
-            style={styles.lady}
-            source={require('../res/images/lady2.png')}
-          />
-        </View>
-
-        <View style={styles.textContainer}>
-          <View style={styles.textInfo}>
-            <Header style={styles.headerText}>Learning!!</Header>
-            <SmallText style={styles.paragraph}>
-              Expand your horizons and acquire new skills through mentorship.
-              Learn from experienced mentors who can guide you towards growth,
-              knowledge, and self-improvement.
-            </SmallText>
-          </View>
-          <Pressable onPress={() => setPage(2)}>
-            <Image
-              style={styles.nextIcon}
-              source={require('../res/icons/nextFlow.png')}
-            />
-          </Pressable>
-        </View>
-      </View> */}
-
-      {/* <Text>Page 2</Text>
-      <Button title="Goto 3" onPress={() => setPage(2)} /> */}
       <Screen2 setPage={setPage} />
     </View>
   );
@@ -88,40 +32,9 @@ const Welcome2 = ({ setPage }: { setPage: (val: number) => void }) => {
 
 const Welcome3 = ({ setPage, navigation }: { setPage: (val: number) => void, navigation: any }) => {
 
-  // const pressHandler = () => {
-  //   navigation.navigate('SignIn');
-  // };
-
 
   return (
     <View>
-      {/* <View style={styles.container}>
-        <View style={styles.imgContainer}>
-          <Image
-            style={styles.lady}
-            source={require('../res/images/lady3.png')}
-          />
-        </View>
-
-        <View style={styles.textContainer}>
-          <View style={styles.textInfo}>
-            <Header style={styles.headerText}>Examination</Header>
-            <SmallText style={styles.paragraph}>
-              Get access to valuable resources, exam tips, and personalized
-              advice to help you succeed
-            </SmallText>
-          </View>
-          <Pressable onPress={(pressHandler)}>
-            <Image
-              style={styles.nextIcon}
-              source={require('../res/icons/nextFlow.png')}
-            />
-          </Pressable>
-        </View>
-      </View> */}
-      {/*       
-      <Text>Page 3</Text>
-      <Button title="Go back to 1" onPress={() => setPage(0)} /> */}
       <Screen3 setPage={setPage} navigation={navigation}/>
     </View>
   );
@@ -139,15 +52,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: Colors.White,
-    // justifyContent:'space-between'
+ 
   },
 
   imgContainer: {
     height: '50%',
-    // display: 'flex',
     width: '100%',
     justifyContent: 'center',
-    // backgroundColor: 'red',
     alignItems: 'center',
   },
   textContainer: {
@@ -157,7 +68,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 20,
     alignItems: 'center',
-    // backgroundColor: 'green',
+
   },
 
   textColor: {
@@ -167,13 +78,9 @@ const styles = StyleSheet.create({
   },
 
   textInfo: {
-    // display: 'flex',
-    // height: '100%',
     marginTop: 50,
     width: '100%',
     alignItems: 'center',
-    // justifyContent: 'center',
-    // backgroundColor: 'orange',
     paddingBottom: 70,
     marginBottom: 20,
   },
@@ -184,7 +91,6 @@ const styles = StyleSheet.create({
   paragraph: {
     top: 20,
     textAlign: 'center',
-    // color: 'white',
     fontSize: 16,
   },
 

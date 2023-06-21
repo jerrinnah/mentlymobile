@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const LongBtn = () => {
+const LongButton = () => {
   return (
     <View>
       <Text>LongBtn</Text>
@@ -9,4 +9,4 @@ const LongBtn = () => {
   )
 }
 
-export default LongBtn
+export default LongButton

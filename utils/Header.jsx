@@ -13,6 +13,6 @@ const styles = StyleSheet.create({
   defaultStyle: {
     fontSize: 20,
     fontFamily: 'Montserrat',
-    // fontWeight: 200,
+    fontWeight: 200,
   },
 });

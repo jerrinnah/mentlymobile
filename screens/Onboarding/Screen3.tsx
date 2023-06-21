@@ -3,6 +3,8 @@ import React from 'react'
 import Header from '../../utils/Header'
 import SmallText from '../../utils/SmallText'
 import Colors from '../../utils/Colors'
+import BigText from '../../components/SmallText/BigText'
+import RegularText from '../../components/SmallText/RegularText'
 
 
 const Screen3 = ({setPage, navigation}) => {
@@ -22,11 +24,11 @@ const Screen3 = ({setPage, navigation}) => {
 
         <View style={styles.textContainer}>
           <View style={styles.textInfo}>
-            <Header style={styles.headerText}>Examination</Header>
-            <SmallText style={styles.paragraph}>
-              Get access to valuable resources, exam tips, and personalized
+            <BigText>Examination</BigText>
+            <RegularText>
+            Get access to valuable resources, exam tips, and personalized
               advice to help you succeed
-            </SmallText>
+          </RegularText>
           </View>
           <Pressable onPress={(pressHandler)}>
             <Image
