@@ -4,7 +4,7 @@ import Colors from '../../utils/Colors';
 import { TextProps } from './types';
 
 const StyledText = styled.Text`
-    font-size: 15px;
+    font-size: 18px;
     fontFamily: Nunito_Sans;
     color: ${Colors.Black};
     textAlign: center;
