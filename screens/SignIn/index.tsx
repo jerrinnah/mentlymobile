@@ -20,30 +20,72 @@ import StyledInput from '../../components/Inputs/StyledTextInput';
 import CustomTextFieldProps from '../../components/Forms/CustomTextFieldProps';
 import SmallerText from '../../components/SmallText/SmallerText';
 import RadioButton from '../../components/Radio/RadioProp';
+import RadioT, { AccountTypePicker } from '../../components/Radio/RadioT';
+import { RadioGroup } from 'react-native-radio-buttons-group';
+import Screen2 from '../Onboarding/Screen2';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
+const arr = ['A mentee', 'A mentor', 'An organisation'];
 
-const SignIn = ({navigation}) => {
+const SignIn = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [activeIndex, setActiveIndex] = React.useState(-1);
 
-  const pressHandler = () => {
-    navigation.navigate('SignIn');
+  const signUp = React.useCallback(async () => {
+    console.log(handleAccountType());
+    try {
+      const request = await axios.post(`https://mently-api.herokuapp.com/auth/signup?entity=${'mentee'}`, {
+        "username": "hiatus_1",
+        "firstname": "Victor",
+        "lastname": "Orlunda",
+        "email": "example3@email.com",
+        "phone": "+2345566778899",
+        "password": "skippT55ed",
+        "entity":"mentee"
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    const result = await request.data;
+    console.log(result);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, []);
+
+  const nav = useNavigation<any>();
+
+  // const pressHandler = () => {
+  //   nav.navigate('Screen1')
+  // };
+
+  const handleCheck = React.useCallback(
+    (index: number) => {
+      setActiveIndex(index);
+      if (index === 0) {
+        nav.navigate('MenteeSignup') 
+        setModalVisible(false)
+      }
+    },
+    [activeIndex],
+  );
+
+  const handleAccountType = () => {
+    switch (activeIndex) {
+      case 0:
+        return 'mentee'
+      case 1:
+        return 'mentor'
+      case 2:
+        return 'org'
+      default:
+        return 'mentee'
+        break;
+    }
   };
-
-  // switch (color) {
-  //   case 0: {
-  //     //  change color
-  //     style={styles.radioBtn}
-  //   }
-  //   case 1: {
-  //     // change color
-  //   }
-  //   case 2: {
-  //     // change color
-  //   }
-  //   default: {
-  //     //  back to default
-  //   }
-  // }
 
   return (
     <View style={styles.container}>
@@ -100,15 +142,16 @@ const SignIn = ({navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <BigText>Sign Up as</BigText>
-
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            ></Pressable>
-
-            <View>
-              <RadioButton />
-            </View>
+            {arr.map((item, index) => (
+              <AccountTypePicker
+                key={index}
+                label={item}
+                index={index}
+                isChecked={activeIndex === index}
+                onCheck={handleCheck}
+              />
+            ))}
+            {/* <RadioT/> */}
           </View>
         </View>
       </Modal>

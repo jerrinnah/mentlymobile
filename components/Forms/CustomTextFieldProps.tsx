@@ -1,39 +1,81 @@
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Controller, useForm } from 'react-hook-form';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import RegularText from '../SmallText/RegularText';
+import { TextInput } from 'react-native';
 
 
-// import "./styles.css";
-import { useForm } from "react-hook-form";
+const CustomTextFieldProps = () => {
 
-export default function CustomTextFieldProps() {
-  const form = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      hello: "world"
+      username:'',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmpassword:'',
     },
-    mode: "onChange"
-  });
-  const { register } = form;
 
+  });
+  const onSubmit = (data: any) => console.log(data);
   return (
-    <form>
-      <label>
-        <div>
-          <input type="radio" value="dor" {...register("hello")} />
-          dor
-        </div>
-      </label>
-      <label>
-        <div>
-          <input type="radio" value="world" {...register("hello")} />
-          world
-        </div>
-      </label>
-      <label>
-        <div>
-          <input type="radio" value="alon" {...register("hello")} />
-          alon
-        </div>
-      </label>
-      <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
-    </form>
-  );
+    <View>
+       <Controller
+        control={control}
+        rules={{
+          required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <View style={styles.inputContainer}>
+            <RegularText> Name </RegularText>
+            <TextInput
+              // placeholder=''
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              style={styles.textInput}
+            />
+          </View>
+        )}
+        name='firstName'
+      />
+      {errors.firstName && <Text>This is required.</Text>}
+    </View>
+  )
 }
 
+export default CustomTextFieldProps
+
+
+const styles = StyleSheet.create({
+  container: {
+  
+      top:80,
+    height: '100%',
+    alignItems: 'center',
+  },
+  textInput: {
+    height: 50,
+    width: 320,
+    borderRadius: 5,
+    borderWidth: 2,
+  },
+
+  inputContainer: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    },
+    button: {
+        top: 30,
+       
+    },
+    bgColor: {
+        backgroundColor: Colors.NavyBlue100
+    }
+});

@@ -17,7 +17,7 @@ function RadioButton({ navigation }) {
     const radioButtons: RadioButtonProps[] = useMemo(() => ([
         {
             id: '1', // acts as primary key, should be unique and non-empty string
-            label: <RegularText>A Mentee</RegularText>,
+            label: <RegularText >A Mentee</RegularText>,
             value: 'Mentee',
             // onPress: (() => {pressHandler})
         },
