@@ -26,11 +26,11 @@ function RadioButton({ navigation }) {
             label: <RegularText>A Mentor</RegularText>,
             value: 'Mentor'
         },
-        {
-            id: '3',
-            label: <RegularText>An Organisation</RegularText>,
-            value: 'Organisation'
-        }
+        // {
+        //     id: '3',
+        //     label: <RegularText>An Organisation</RegularText>,
+        //     value: 'Organisation'
+        // }
     ]), []);
 
   

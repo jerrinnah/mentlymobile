@@ -44,7 +44,7 @@ const RadioT = () => {
               onPress={() => setColor(1)}
             ></TouchableOpacity> */}
           </View> 
-          <Text>RadioT</Text>
+          {/* <Text>RadioT</Text> */}
         </View>
         <View style={styles.row}>
           <View style={styles.circleBorder}>

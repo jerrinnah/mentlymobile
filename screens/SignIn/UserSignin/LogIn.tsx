@@ -5,6 +5,7 @@ import RegularText from '../../../components/SmallText/RegularText';
 import RegularButton from '../../../components/Buttons/RegularButton';
 import Colors from '../../../utils/Colors';
 import { useNavigation } from '@react-navigation/native';
+import ForgetPassword from '../ForgetPassword/ForgetPassword';
 
 
 
@@ -12,12 +13,17 @@ const LogIn = () => {
   const [check, setCheck] = useState(false);
 
 
+
   const clickHandler = () => {
     setCheck(!check)
 
   }
-  const nav = useNavigation();
+  const nav = useNavigation<any>();
 
+
+  const recoverPassword = () => {
+    nav.navigate(ForgetPassword)
+  }
   const {
     control,
     handleSubmit,
@@ -26,7 +32,6 @@ const LogIn = () => {
     defaultValues: {
       username: '',
       password: '',
-
     },
   });
 
@@ -99,9 +104,9 @@ const LogIn = () => {
             <Text style={styles.remember}>Remember Me</Text>
           </View>
 
-          <View>
+          <Pressable onPress={recoverPassword}>
             <RegularText style={styles.recover}>Fogot Password</RegularText>
-          </View>
+          </Pressable>
         </View>
       </View>
   

@@ -35,22 +35,26 @@ const SignIn = ({ navigation }) => {
   const signUp = React.useCallback(async () => {
     console.log(handleAccountType());
     try {
-      const request = await axios.post(`https://mently-api.herokuapp.com/auth/signup?entity=${'mentee'}`, {
-        "username": "hiatus_1",
-        "firstname": "Victor",
-        "lastname": "Orlunda",
-        "email": "example3@email.com",
-        "phone": "+2345566778899",
-        "password": "skippT55ed",
-        "entity":"mentee"
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+      const request = await axios.post(
+        `https://mently-api.herokuapp.com/auth/signup?entity=${'mentee'}`,
+        {
+          username: 'hiatus_1',
+          firstname: 'Victor',
+          lastname: 'Orlunda',
+          email: 'example3@email.com',
+          phone: '+2345566778899',
+          password: 'skippT55ed',
+          entity: 'mentee',
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
 
-    const result = await request.data;
-    console.log(result);
+      const result = await request.data;
+      console.log(result);
     } catch (error) {
       console.log(error.message);
     }
@@ -66,23 +70,25 @@ const SignIn = ({ navigation }) => {
     (index: number) => {
       setActiveIndex(index);
       if (index === 0) {
-        nav.navigate('MenteeSignup') 
-        setModalVisible(false)
+        nav.navigate('MenteeSignup');
+        setModalVisible(false);
       }
     },
     [activeIndex],
   );
 
+  const signInHandler = () => {
+    nav.navigate('LogIn');
+  };
+
   const handleAccountType = () => {
     switch (activeIndex) {
       case 0:
-        return 'mentee'
+        return 'mentee';
       case 1:
-        return 'mentor'
-      case 2:
-        return 'org'
+        return 'mentor';
       default:
-        return 'mentee'
+        return 'mentee';
         break;
     }
   };
@@ -118,12 +124,7 @@ const SignIn = ({ navigation }) => {
           >
             Sign Up
           </RegularButton>
-          <RegularButton
-            style={[styles.buttons]}
-            onPress={() => {
-              alert('Press Me');
-            }}
-          >
+          <RegularButton style={[styles.buttons]} onPress={signInHandler}>
             Sign In
           </RegularButton>
         </View>
