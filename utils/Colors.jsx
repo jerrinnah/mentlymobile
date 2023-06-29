@@ -14,22 +14,23 @@ const Colors = {
   Orange600: '#FEF5E8',
 
   Blue100: '#086BED',
-  Blue100: '#3989F1',
-  Blue100: '#6BA6F4',
-  Blue100: '#9CC4F8',
-  Blue100: '#CEE1FB',
-  Blue100: '#E7F1FE',
+  Blue200: '#3989F1',
+  Blue300: '#6BA6F4',
+  Blue400: '#9CC4F8',
+  Blue500: '#CEE1FB',
+  Blue600: '#E7F1FE',
+  Blue700: '#EFEFF8',
 
-    Black: '#0A0A0A',
-  
-    White: '#FFFFFF',
+  Black: '#0A0A0A',
 
-    Grey100: '#333333',
-    Grey200: '#4D4D4D',
-    Grey300: '#C2C2C2',
-    Grey400: '#E0E0E0',
+  White: '#FFFFFF',
 
-  
+  Grey100: '#333333',
+  Grey200: '#4D4D4D',
+  Grey300: '#C2C2C2',
+  Grey400: '#E0E0E0',
+
+  Danger: 'red',
 };
 
 export default Colors;

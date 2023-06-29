@@ -47,6 +47,7 @@ const Dashboard = () => {
         name="Bootcamps"
         component={Bootcamps}
         options={{
+          headerShown:false,
           tabBarLabel: 'Bootcaamps',
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -60,6 +61,7 @@ const Dashboard = () => {
         name="Calls"
         component={Calls}
         options={{
+          headerShown:false,
           tabBarLabel: 'Calls',
           tabBarIcon: ({ color, focused }) =>
             focused ? (
