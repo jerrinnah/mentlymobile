@@ -5,14 +5,14 @@ import BigText from '../SmallText/BigText';
 import Colors from '../../utils/Colors';
 import ShortButton from '../Buttons/ShortButton';
 
-const BootCampItem = ({ title, date, userCount }) => {
+const coverImage = '../../res/images/campImg.png';
+
+const BootCampItem = ({ title, createdAt, coverImage, numOfActiveMentees }) => {
   return (
     <View style={styles.bootCampContainer}>
-      {/* <Text>BootCampItem</Text> */}
-      <Image
-        style={styles.img}
-        source={require('../../res/images/campImg.png')}
-      />
+ 
+      <Image style={styles.img} source={{uri:coverImage}} />
+
       <View style={styles.bootcampInfo}>
         <View style={styles.indicatorContainer}>
           <View style={styles.indicator}></View>
@@ -25,17 +25,17 @@ const BootCampItem = ({ title, date, userCount }) => {
             <View style={styles.circle}>
               <Image
                 style={styles.imgIcon}
-                source={require('../../res/icons/calendarIcon.png')}
+                source={require('../../res/icons/clock-time.png')}
               />
             </View>
-            <Text>{date}</Text>
+            <Text>{createdAt}</Text>
           </View>
           <View style={styles.userContainer}>
             <Image
               style={styles.userIcon}
               source={require('../../res/icons/user.png')}
             />
-                      <RegularText style={styles.userCount}>{userCount}</RegularText>
+            <RegularText style={styles.userCount}>{numOfActiveMentees}</RegularText>
           </View>
         </View>
       </View>
@@ -47,17 +47,25 @@ export default BootCampItem;
 
 const styles = StyleSheet.create({
   bootCampContainer: {
+    // top:20,
     height: 295,
     width: 325,
     borderRadius: 10,
     justifyContent: 'flex-start',
     marginBottom: 10,
+    bottom: 170,
+    // paddingTop:20,
+    // paddingBottom:30,
+
   },
   img: {
-    height: 159,
+    minHeight: 159,
     width: 325,
     position: 'absolute',
     zIndex: 1,
+    backgroundColor: 'orange',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius:10,
   },
   bootcampInfo: {
     height: 158,

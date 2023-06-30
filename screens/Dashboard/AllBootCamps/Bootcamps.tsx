@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BootCampItem from '../../../components/DashboardComponents/BootCampItem';
 import Colors from '../../../utils/Colors';
 import RegularText from '../../../components/SmallText/RegularText';
 import BigText from '../../../components/SmallText/BigText';
 import SearchBar from '../../../components/DashboardComponents/SearchBar';
 import { SafeAreaView } from 'react-native';
+import axios from 'axios';
 
 // const Data = [
 //     {
@@ -65,12 +66,14 @@ const DATA = [
     status: 'online',
     date: '01 August 2013',
     userCount: 530,
+    // coverImage: require('../../../res/images/daph-eiffel-tower.jpeg')
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
     title: 'International Polytechnic Winter School',
     date: '01 August 2013',
     userCount: 942,
+    // coverImage: require('../../../res/images/daph-eiffel-tower.jpeg')
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
@@ -80,51 +83,89 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-471f-bds96-145571e29d72',
-    title: 'Cybersecurity: Managing Risk in the Information Age Online Short Course',
-      date: '01 Sept 2011',
-      userCount:844,
+    title:
+      'Cybersecurity: Managing Risk in the Information Age Online Short Course',
+    date: '01 Sept 2011',
+    userCount: 844,
   },
   {
     id: '58694a0f-3da1-471f-bd9a6-145571e29d72',
     title: 'Digitization of the Legal Sector',
-      date: '01 January 2013',
-      userCount:1832,
+    date: '01 January 2013',
+    userCount: 1832,
   },
   {
     id: '58694ae0f-3da1-471f-bd96-145571e29d72',
     title: 'Applied Quantitative Methods to Analyse Business Data',
-      date: '01 August 2013',
-      userCount:443,
+    date: '01 August 2013',
+    userCount: 443,
   },
 ];
 
-type ItemProps = { title: string; date: string; userCount: number };
+type ItemProps = {
+  title: string;
+  userCount: number;
+  coverImage: URL;
+  createdAt: string;
+  numOfActiveMentees: number;
 
-const Item = ({ title, date, userCount }: ItemProps) => (
-  <BootCampItem title={title} date={date} userCount={userCount} />
+};
+
+const Item = ({ title, createdAt, userCount, coverImage, numOfActiveMentees }: ItemProps) => (
+  <BootCampItem
+    title={title}
+    createdAt={createdAt}
+    coverImage={coverImage}
+    numOfActiveMentees={numOfActiveMentees}
+
+  />
 );
 
+export type Camp = {
+  id: string;
+  title: string;
+  desc: string;
+  coverImage: URL;
+  category: string;
+  email: string;
+  phone: number;
+  active: boolean;
+  duration: number;
+  createdAt: string;
+  numOfActiveMentees: number;
+};
+
 const Bootcamps = () => {
+  const [camps, setCamps] = useState<Camp[]>([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=10',
+      )
+      .then(response => setCamps(response.data.data[0].bootcamps));
+  }, []);
+
+
   return (
+    
     <View style={styles.container}>
       <View style={styles.topBar}>
         <BigText style={styles.bootcampTitle}> All Bootcamps</BigText>
         <SearchBar />
       </View>
       <View>
-        {/* <BootCampItem />
-        <BootCampItem />
-        <BootCampItem /> */}
-    <SafeAreaView>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={DATA}
-          renderItem={({ item }) => (
-            <Item title={item.title} date={item.date} userCount={item.userCount} />
-          )}
-          keyExtractor={item => item.id}
-                  />
-                  </SafeAreaView>
+        <SafeAreaView style={styles.flatlist}>
+          <FlatList
+            bounces={true}
+            showsVerticalScrollIndicator={false}
+            data={camps}
+            renderItem={({ item }) => (
+              <Item title={item.title} userCount={0} coverImage={item.coverImage} createdAt={item.createdAt} numOfActiveMentees={item.numOfActiveMentees}/>
+            )}
+            keyExtractor={item =>item.id}
+          />
+        </SafeAreaView>
       </View>
     </View>
   );
@@ -142,12 +183,19 @@ const styles = StyleSheet.create({
   },
   topBar: {
     // backgroundColor: 'red',
-    marginBottom: 15,
+    // marginBottom: 80,
     justifyContent: 'space-around',
     height: 100,
+    // paddingBottom:30,
+  
   },
   bootcampTitle: {
     fontSize: 22,
     color: Colors.NavyBlue100,
   },
+  flatlist: {
+    // top:70,
+    // marginBottom:90,
+    // paddingTop:90,
+  }
 });

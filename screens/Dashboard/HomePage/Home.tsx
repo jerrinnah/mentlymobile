@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Colors from '../../../utils/Colors';
 import RegularText from '../../../components/SmallText/RegularText';
 import SearchBar from '../../../components/DashboardComponents/SearchBar';
 import BootCampItem from '../../../components/DashboardComponents/BootCampItem';
+import axios from 'axios';
 
 const DATA = [
   {
@@ -15,17 +16,36 @@ const DATA = [
   },
 ];
 
-const baseUrl = "https://app.mymently.com/bootcamps/list-bootcamps?category=frontend";
+const baseUrl =
+  'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend';
 
+type ItemProps = {
+  title: string;
+  userCount: number;
+  coverImage: string;
+  createdAt: string;
+  numOfActiveMentees: number;
+};
 
-type ItemProps = { title: string; date: string; userCount: number };
-
-const Item = ({ title, date, userCount }: ItemProps) => (
-  <BootCampItem title={title} date={date} userCount={userCount} />
+const Item = ({ title, numOfActiveMentees, coverImage, createdAt }: ItemProps) => (
+  <BootCampItem
+    title={title}
+    createdAt={createdAt}
+    coverImage={coverImage}
+    numOfActiveMentees={numOfActiveMentees}
+  />
 );
 
 const Home = () => {
-    
+  const [camps, setCamps] = useState([]);
+  useEffect(() => {
+    axios
+      .get(
+        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=1',
+      )
+      .then(response => setCamps(response.data.data[0].bootcamps));
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.topRow}>
@@ -59,9 +79,16 @@ const Home = () => {
         <View>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={DATA}
+            scrollEnabled={false}
+            data={camps}
             renderItem={({ item }) => (
-              <Item title={item.title} date={item.date} userCount={item.userCount} />
+              <Item
+                title={item.title}
+                userCount={0}
+                coverImage={item.coverImage}
+                createdAt={item.createdAt}
+                numOfActiveMentees={item.numOfActiveMentees}
+              />
             )}
             keyExtractor={item => item.id}
           />

@@ -7,8 +7,9 @@ import BigText from '../SmallText/BigText';
 const CallCard = () => {
   return (
     <View style={styles.callWidth}>
-      <View style={styles.time}>
-        <Text>TIME</Text>
+          <View style={styles.time}>
+             <RegularText>10:40</RegularText>
+            <RegularText>Join</RegularText>
       </View>
       <View style={styles.callRange}>
         <View style={styles.callDetails}>
@@ -32,8 +33,10 @@ const CallCard = () => {
         </View>
       </View>
       <View style={styles.navRight}>
-        <Text>Test</Text>
-      </View>
+        <Image style={styles.rightIcon} source={require('../../res/icons/rightIcon.png')}/>
+          </View>
+          
+        
     </View>
   );
 };
@@ -50,7 +53,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     // overflow: 'hidden',
-    backgroundColor: 'white',
+        backgroundColor: 'white',
+        marginBottom:20,
   },
   time: {
     height: 75,
@@ -82,7 +86,11 @@ const styles = StyleSheet.create({
   },
   classDetails: {
     display: 'flex',
-    flexDirection: 'row',
+      flexDirection: 'row',
+      width: '100%',
+      justifyContent: 'space-around',
+      alignItems:'center',
+    // backgroundColor:'green'
   },
   imgIcon: {
     height: 22,
@@ -93,13 +101,22 @@ const styles = StyleSheet.create({
     width: 19,
   },
   mentorInfo: {
-    flexDirection: 'row',
+      flexDirection: 'row',
+      height:'100%',
+    //   backgroundColor: 'yellow',
+      width: 108,
+      alignItems: 'center',
+      justifyContent:'space-between'
   },
   timeContainer: {
-      flexDirection: 'row',
-    //   width:'100%',
+   
+      width: 80,
+      height:30,
       marginLeft:10,
-    //   backgroundColor:'red'
+    //   backgroundColor: 'red',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent:'space-between'
   },
   callTitle: {
     top: 10,
@@ -109,7 +126,7 @@ const styles = StyleSheet.create({
   navRight: {
     height: 75,
     width: 50,
-    backgroundColor: 'white',
+    // backgroundColor: 'green',
     borderTopEndRadius: 10,
     borderBottomRightRadius: 10,
     justifyContent: 'center',
@@ -124,5 +141,10 @@ const styles = StyleSheet.create({
   
     mentor: {
         fontSize:14
+    },
+    rightIcon: {
+        height: 15,
+        width: 9,
+        
     }
 });

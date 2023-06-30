@@ -26,7 +26,7 @@ import Screen2 from '../Onboarding/Screen2';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-const arr = ['A mentee', 'A mentor', 'An organisation'];
+const arr = ['A mentee', 'A mentor'];
 
 const SignIn = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);

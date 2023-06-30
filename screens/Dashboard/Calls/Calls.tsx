@@ -20,8 +20,8 @@ import Colors from '../../../utils/Colors';
 
 const Calls = () => {
   return (
-      <View style={styles.container}>
-          {/* <BigText>All Calls</BigText> */}
+    <View style={styles.container}>
+      {/* <BigText>All Calls</BigText> */}
       {/* <Image
         style={styles.img}
         source={require('../../../res/images/noCallImg.png')}
@@ -32,10 +32,20 @@ const Calls = () => {
       </RegularText> */}
 
       <BigText style={styles.callsTitle}>All Calls</BigText>
-      
-          <View>
-              <CallCard/>
-          </View>
+
+      <View>
+        <CallCard />
+      </View>
+
+      <BigText style={styles.schedule}>Scheduled Calls</BigText>
+
+
+      <View>
+        <CallCard />
+        <CallCard />
+        <CallCard />
+        <CallCard />
+      </View>
     </View>
   );
 };
@@ -49,8 +59,11 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     alignItems: 'center',
-        justifyContent: 'flex-start',
-    backgroundColor:'white'
+    // justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    
+    
+   
   },
   img: {
     top: 20,
@@ -71,4 +84,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  schedule: {
+    fontSize: 16,
+    marginBottom: 20,
+    alignSelf: 'flex-start',
+    paddingLeft:30
+  }
 });
