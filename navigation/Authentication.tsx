@@ -10,8 +10,23 @@ import OtpVerification from '../screens/SignIn/OtpVerification';
 import LogIn from '../screens/SignIn/UserSignin/LogIn';
 import ForgetPassword from '../screens/SignIn/ForgetPassword/ForgetPassword';
 import Dashboard from './Dashboard';
+import BootcampDetail from '../screens/Dashboard/AllBootCamps/BootcampDetail';
 
 const Stack = createNativeStackNavigator();
+
+// export type RootStackParams = {
+//   Onboarding;
+//   Welcome;
+//   Home;
+//   SignIn;
+//   MenteeSignup;
+//   OtpVerification;
+//   LogIn;
+//   ForgetPassword;
+//   Dashboard;
+//   BootcampDetail;
+
+// }
 
 const Authentication = () => {
   return (
@@ -26,6 +41,7 @@ const Authentication = () => {
           <Stack.Screen options={{headerShown:false}} name='LogIn' component={LogIn}/>
           <Stack.Screen options={{ headerShown: false }} name='ForgetPassword' component={ForgetPassword} />
            <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
+           <Stack.Screen options={{ headerShown: false }} name='BootcampDetail' component={BootcampDetail} />
       
       </Stack.Navigator>
   )

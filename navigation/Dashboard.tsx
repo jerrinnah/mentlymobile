@@ -33,7 +33,7 @@ const Dashboard = () => {
         name="Feed"
         component={Home}
         options={{
-          headerShown:false,
+          headerShown: false,
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -47,7 +47,7 @@ const Dashboard = () => {
         name="Bootcamps"
         component={Bootcamps}
         options={{
-          headerShown:false,
+          headerShown: false,
           tabBarLabel: 'Bootcaamps',
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -61,7 +61,7 @@ const Dashboard = () => {
         name="Calls"
         component={Calls}
         options={{
-          headerShown:false,
+          headerShown: false,
           tabBarLabel: 'Calls',
           tabBarIcon: ({ color, focused }) =>
             focused ? (
@@ -84,14 +84,9 @@ const Dashboard = () => {
             ),
         }}
       />
+     
     </Tab.Navigator>
 
-    //   <Stack.Navigator>
-    //   <Stack.Screen name="Home" component={Home} />
-    //   {/* <Stack.Screen name="Notifications" component={Notifications} />
-    //   <Stack.Screen name="Profile" component={Profile} />
-    //   <Stack.Screen name="Settings" component={Settings} /> */}
-    // </Stack.Navigator>
   );
 };
 

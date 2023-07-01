@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Touchable } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import BootCampItem from '../../../components/DashboardComponents/BootCampItem';
 import Colors from '../../../utils/Colors';
-import RegularText from '../../../components/SmallText/RegularText';
 import BigText from '../../../components/SmallText/BigText';
 import SearchBar from '../../../components/DashboardComponents/SearchBar';
 import { SafeAreaView } from 'react-native';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 // const Data = [
 //     {
@@ -108,16 +110,19 @@ type ItemProps = {
   coverImage: URL;
   createdAt: string;
   numOfActiveMentees: number;
-
 };
 
-const Item = ({ title, createdAt, userCount, coverImage, numOfActiveMentees }: ItemProps) => (
+const Item = ({
+  title,
+  createdAt,
+  coverImage,
+  numOfActiveMentees,
+}: ItemProps) => (
   <BootCampItem
     title={title}
     createdAt={createdAt}
     coverImage={coverImage}
     numOfActiveMentees={numOfActiveMentees}
-
   />
 );
 
@@ -133,9 +138,12 @@ export type Camp = {
   duration: number;
   createdAt: string;
   numOfActiveMentees: number;
+  
 };
 
-const Bootcamps = () => {
+const Bootcamps = ({navigation}) => {
+  // const nav = useNavigation<any>();
+
   const [camps, setCamps] = useState<Camp[]>([]);
 
   useEffect(() => {
@@ -146,9 +154,7 @@ const Bootcamps = () => {
       .then(response => setCamps(response.data.data[0].bootcamps));
   }, []);
 
-
   return (
-    
     <View style={styles.container}>
       <View style={styles.topBar}>
         <BigText style={styles.bootcampTitle}> All Bootcamps</BigText>
@@ -160,10 +166,16 @@ const Bootcamps = () => {
             bounces={true}
             showsVerticalScrollIndicator={false}
             data={camps}
+            keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <Item title={item.title} userCount={0} coverImage={item.coverImage} createdAt={item.createdAt} numOfActiveMentees={item.numOfActiveMentees}/>
+              <TouchableOpacity onPress={()=>(navigation.navigate('BootcampDetail', {item}))}>
+                <Item
+                  title={item.title}
+                  coverImage={item.coverImage}
+                  createdAt={item.createdAt}
+                  numOfActiveMentees={item.numOfActiveMentees} userCount={0}              />
+              </TouchableOpacity>
             )}
-            keyExtractor={item =>item.id}
           />
         </SafeAreaView>
       </View>
@@ -187,7 +199,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     height: 100,
     // paddingBottom:30,
-  
   },
   bootcampTitle: {
     fontSize: 22,
@@ -197,5 +208,5 @@ const styles = StyleSheet.create({
     // top:70,
     // marginBottom:90,
     // paddingTop:90,
-  }
+  },
 });

@@ -3,15 +3,19 @@ import React from 'react';
 import RegularText from '../SmallText/RegularText';
 import BigText from '../SmallText/BigText';
 import Colors from '../../utils/Colors';
-import ShortButton from '../Buttons/ShortButton';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import BootcampDetail from '../../screens/Dashboard/AllBootCamps/BootcampDetail';
 
 const coverImage = '../../res/images/campImg.png';
 
 const BootCampItem = ({ title, createdAt, coverImage, numOfActiveMentees }) => {
+
+  const nav = useNavigation<any>();
+  
   return (
     <View style={styles.bootCampContainer}>
- 
-      <Image style={styles.img} source={{uri:coverImage}} />
+      <Image style={styles.img} source={{ uri: coverImage }} />
 
       <View style={styles.bootcampInfo}>
         <View style={styles.indicatorContainer}>
@@ -35,7 +39,9 @@ const BootCampItem = ({ title, createdAt, coverImage, numOfActiveMentees }) => {
               style={styles.userIcon}
               source={require('../../res/icons/user.png')}
             />
-            <RegularText style={styles.userCount}>{numOfActiveMentees}</RegularText>
+            <RegularText style={styles.userCount}>
+              {numOfActiveMentees}
+            </RegularText>
           </View>
         </View>
       </View>
@@ -56,7 +62,6 @@ const styles = StyleSheet.create({
     bottom: 170,
     // paddingTop:20,
     // paddingBottom:30,
-
   },
   img: {
     minHeight: 159,
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     backgroundColor: 'orange',
     borderTopLeftRadius: 10,
-    borderTopRightRadius:10,
+    borderTopRightRadius: 10,
   },
   bootcampInfo: {
     height: 158,
