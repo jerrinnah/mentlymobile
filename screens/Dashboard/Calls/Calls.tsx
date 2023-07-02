@@ -5,31 +5,12 @@ import BigText from '../../../components/SmallText/BigText';
 import RegularText from '../../../components/SmallText/RegularText';
 import Colors from '../../../utils/Colors';
 
-// const noCallsNotification = () => {
-//   <View style={styles.infoDisplay}>
-//     <Image
-//       style={styles.img}
-//       source={require('../../../res/images/noCallImg.png')}
-//     />
-//     <BigText style={styles.subText}>No Call available!</BigText>
-//     <RegularText style={styles.smallText}>
-//       Get a call and see all here.
-//     </RegularText>
-//   </View>;
-// };
+
 
 const Calls = () => {
   return (
     <View style={styles.container}>
-      {/* <BigText>All Calls</BigText> */}
-      {/* <Image
-        style={styles.img}
-        source={require('../../../res/images/noCallImg.png')}
-      />
-      <BigText style={styles.subText}>No Call available!</BigText>
-      <RegularText style={styles.smallText}>
-        Get a call and see all here.
-      </RegularText> */}
+    
 
       <BigText style={styles.callsTitle}>All Calls</BigText>
 

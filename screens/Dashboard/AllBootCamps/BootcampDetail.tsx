@@ -1,80 +1,91 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RegularText from '../../../components/SmallText/RegularText';
 import BigText from '../../../components/SmallText/BigText';
 import Colors from '../../../utils/Colors';
 import RegularButton from '../../../components/Buttons/RegularButton';
+import axios from 'axios';
+import { FlatList } from 'react-native-gesture-handler';
+import CampDetails from '../../../components/Bootcamps/CampDetails';
 
-const BootcampDetail = () => {
+export type Camp = {
+  id: string;
+  desc: string;
+  organizer: string;
+  organizeBy: string;
+  start: string;
+  category: string;
+  location: string;
+  title: string;
+  end: string;
+};
 
-    const nav = useNavigation();
+const Item = ({
+  id,
+  title,
+  desc,
+  organizeBy,
+  organizer,
+  category,
+  location,
+  start,
+  end,
+}: Camp) => (
+  <CampDetails
+    id={id}
+    title={title}
+    desc={desc}
+    organizeBy={organizeBy}
+    organizer={organizer}
+    category={category}
+    location={location}
+    start={start}
+        end={end}
+    
+  />
+);
+const BootcampDetail = ({ route, navigation }) => {
+    const [campdetail, setCampdetail] = useState<Camp[]>([]);
+    
+
+  const nav = useNavigation<any>();
+
+
+  useEffect(() => {
+    axios
+      .get(
+        'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
+      )
+      .then(response => setCampdetail(response.data.data[0].bootcamps));
+  }, []);
+
+  const item = route.params;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.title}>
-        <Image
-          style={styles.img}
-          source={require('../../../res/images/marketingImg.png')}
+    <>
+      <View style={styles.container}>
+        <FlatList
+          data={campdetail}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <Item
+              desc={item.desc}
+              organizer={item.organizer}
+              organizeBy={item.organizer}
+              start={item.start}
+              end={item.end}
+              category={item.category}
+              location={item.location}
+              title={item.title}
+              id={item.id}
+            />
+          )}
         />
-        <View style={styles.titleIntro}>
-          <BigText style={styles.titleHeader}>Digital Marketing</BigText>
-          <View style={styles.organizeBy}>
-            <RegularText style={styles.titlePara}>Organized by:</RegularText>
-            <RegularText style={styles.titleName}> Gordon</RegularText>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.bootcampDesc}>
-        <Text style={styles.desc}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat..... See more
-        </Text>
-      </View>
-
-      <View style={styles.textContainer}> 
-        <View style={styles.campInfo}>
-          <View style={styles.textAl}>
-            <BigText style={styles.detailTitle}>Date</BigText>
-            <RegularText style={styles.detailPara}>April 21 2021</RegularText>
-          </View>
-          <View style={styles.textAl}>
-            <BigText style={styles.detailTitle}>Time</BigText>
-            <RegularText style={styles.detailPara}>
-              9:00 AM - 3:00 PM
-            </RegularText>
-          </View>
-        </View>
-        <View style={styles.campInfo}>
-          <View style={styles.textAl}>
-            <BigText style={styles.detailTitle}>Language</BigText>
-            <RegularText style={styles.detailPara}>English</RegularText>
-          </View>
-          <View style={styles.textAl}>
-            <BigText style={styles.detailTitle}>Category</BigText>
-            <RegularText style={styles.detailPara}>
-            Design
-            </RegularText>
-          </View>
-        </View>
-        <View style={styles.campInfo}>
-          <View style={styles.textAl}>
-            <BigText style={styles.detailTitle}>Bootcamp Type</BigText>
-            <RegularText style={styles.detailPara}>Virtual</RegularText>
-          </View>
-          <View style={styles.textAl}>
-            <BigText style={styles.detailTitle}>Venue</BigText>
-            <RegularText style={styles.detailPara}>
-            google meet
-            </RegularText>
-          </View>
-        </View>
           </View>
           
-          <RegularButton style={styles.applyButton} onPress={()=>nav.navigate('Dashboard')}>Apply here</RegularButton>
-    </View>
+        
+    </>
   );
 };
 
@@ -86,12 +97,12 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    },
-    textContainer: {
-        top:20,
-        // backgroundColor:'orange'
-    },
-    title: {
+  },
+  textContainer: {
+    top: 20,
+    // backgroundColor:'orange'
+  },
+  title: {
     //   paddingTop:20,
     // backgroundColor: 'grey',
   },
@@ -123,8 +134,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   bootcampDesc: {
-      padding: 20,
-      top:20,
+    padding: 20,
+    top: 20,
   },
   desc: {
     fontSize: 14,
@@ -135,26 +146,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: 350,
     justifyContent: 'space-between',
-      marginBottom: 30,
+    marginBottom: 30,
     // backgroundColor:'red'
   },
 
   detailTitle: {
-      fontSize: 18,
-      textAlign:'left'
-      
+    fontSize: 18,
+    textAlign: 'left',
   },
   detailPara: {
-      fontSize: 13,
-      textAlign: 'left',
-      top:15,
-    },
-    textAl: {
-        display: 'flex',
-        // backgroundColor: 'green',
-        width:150,
-    },
-    applyButton: {
-        top: 70,
-    }
+    fontSize: 13,
+    textAlign: 'left',
+    top: 15,
+  },
+  textAl: {
+    display: 'flex',
+    // backgroundColor: 'green',
+    width: 150,
+  },
+  applyButton: {
+    top: 70,
+  },
 });

@@ -112,12 +112,7 @@ type ItemProps = {
   numOfActiveMentees: number;
 };
 
-const Item = ({
-  title,
-  createdAt,
-  coverImage,
-  numOfActiveMentees,
-}: ItemProps) => (
+const Item = ({title,createdAt,coverImage,numOfActiveMentees,}: ItemProps) => (
   <BootCampItem
     title={title}
     createdAt={createdAt}

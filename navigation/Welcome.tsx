@@ -11,9 +11,6 @@ import Screen3 from '../screens/Onboarding/Screen3';
 
 const Welcome = ({ setPage }: { setPage: (val: number) => void }) => {
 
-  // const pressHandler = () => {
-  //   navigation.navigate('Unboarding3');
-  // };
   
   return (
     <View>

@@ -19,9 +19,6 @@ const OtpVerification = ({ navigation }) => {
 
   const nav = useNavigation<any>();
 
-  // const clickHandler = () => {
-  //   nav.navigate('Success');
-  // };
 
   const Success = () => {
       setModal(!modal);

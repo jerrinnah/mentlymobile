@@ -11,6 +11,7 @@ import LogIn from '../screens/SignIn/UserSignin/LogIn';
 import ForgetPassword from '../screens/SignIn/ForgetPassword/ForgetPassword';
 import Dashboard from './Dashboard';
 import BootcampDetail from '../screens/Dashboard/AllBootCamps/BootcampDetail';
+import BootcampClass from '../components/Bootcamps/BootcampClass';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ const Authentication = () => {
           <Stack.Screen options={{ headerShown: false }} name='ForgetPassword' component={ForgetPassword} />
            <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
            <Stack.Screen options={{ headerShown: false }} name='BootcampDetail' component={BootcampDetail} />
+           <Stack.Screen options={{ headerShown: false }} name='BootcampClass' component={BootcampClass} />
       
       </Stack.Navigator>
   )
