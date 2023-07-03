@@ -75,6 +75,7 @@ const Dashboard = () => {
         name="Settings"
         component={Settings}
         options={{
+          headerShown:false,
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, focused }) =>
             focused ? (

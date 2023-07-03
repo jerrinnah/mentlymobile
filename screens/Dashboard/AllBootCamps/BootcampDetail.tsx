@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, SafeAreaView, Modal } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  Modal,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import RegularText from '../../../components/SmallText/RegularText';
@@ -41,16 +48,13 @@ const Item = ({
     category={category}
     location={location}
     start={start}
-        end={end}
-    
+    end={end}
   />
 );
 const BootcampDetail = ({ route, navigation }) => {
-    const [campdetail, setCampdetail] = useState<Camp[]>([]);
-    
+  const [campdetail, setCampdetail] = useState<Camp[]>([]);
 
   const nav = useNavigation<any>();
-
 
   useEffect(() => {
     axios
@@ -82,9 +86,7 @@ const BootcampDetail = ({ route, navigation }) => {
             />
           )}
         />
-          </View>
-          
-        
+      </View>
     </>
   );
 };

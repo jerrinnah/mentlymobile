@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Modal } from 'react-native';
+import { StyleSheet, Text, View, Image, Modal, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import BigText from '../SmallText/BigText';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -6,28 +6,37 @@ import RegularButton from '../Buttons/RegularButton';
 import RegularText from '../SmallText/RegularText';
 import { useNavigation } from '@react-navigation/native';
 
-const CampDetails = ({ id,end,desc,organizer,organizeBy,start,  category,  location,  title, navigation}) => {
+const CampDetails = ({id,end,desc,organizeBy,start,category,location, title, navigation}) => {
 
   const nav = useNavigation<any>();
 
   const [modal, setModal] = useState(false);
 
   const clickHandler = () => {
-
-      setModal(!modal);
-      setTimeout(() => {
-        setModal(false);
-      },3000);
-      nav.navigate('BootcampClass');
+    setModal(!modal);
+    setTimeout(() => {
+      setModal(false);
+    }, 3000);
+    nav.navigate('BootcampClass');
   };
 
+  const returnHandler = () => (
+    nav.goBack()
+  )
+
+ 
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Image
-          style={styles.img}
-          source={require('../../res/images/marketingImg.png')}
-        />
+        <View>
+          <Image
+            style={styles.img}
+            source={require('../../res/images/marketingImg.png')}
+          />
+          <TouchableOpacity onPress={returnHandler} style={styles.iconLeft}>
+          <Image style={styles.icon}  source={require('../../res/icons/leftIconOrng.png')}/>
+          </TouchableOpacity>
+        </View>
         <View style={styles.titleIntro}>
           <BigText style={styles.titleHeader}>{title}</BigText>
           {/* <BigText style={styles.titleHeader}>{JSON.stringify(item)}</BigText> */}
@@ -196,4 +205,16 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 25,
   },
+  iconLeft: {
+    height: 15,
+    width: 15,
+    position: 'absolute',
+    left: 30,
+    top:60,
+  },
+
+  icon: {
+    height: 15,
+    width:15
+  }
 });
