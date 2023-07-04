@@ -4,6 +4,7 @@ import BigText from '../../../components/SmallText/BigText'
 import RegularText from '../../../components/SmallText/RegularText'
 import Colors from '../../../utils/Colors'
 import ListItem from '../../../components/Settings/ListItem'
+import { useNavigation } from '@react-navigation/native';
 
 
 const user = require('../../../res/icons/userIconSetting.png')
@@ -11,8 +12,20 @@ const badge = require('../../../res/icons/badge.png')
 const lock = require('../../../res/icons/lock.png')
 const icon = require('../../../res/icons/Logout.png')
 
-export default class Settings extends Component {
-  render() {
+
+const Settings = ({navigation}) => {
+
+const profileHandler = () => {
+  navigation.navigate('Profile')
+}
+const badgeHandler = () => {
+  navigation.navigate('Badge')
+}
+const passwordHandler = () => {
+  navigation.navigate('Password')
+}
+
+
     return (
       <View style={styles.container}>
         <BigText>Settings</BigText>
@@ -24,9 +37,9 @@ export default class Settings extends Component {
         <View style={styles.line}></View>
 
         <View>
-          <ListItem icon={user} settingName="My Profile"/>
-          <ListItem settingName="Badges" icon={badge} />
-          <ListItem settingName="Change Password" icon={lock} />
+          <ListItem icon={user} settingName="My Profile" onPress={profileHandler}/>
+          <ListItem settingName="Badges" icon={badge} onPress={badgeHandler} />
+          <ListItem settingName="Change Password" icon={lock} onPress={passwordHandler} />
 
           <View>
           <View style={styles.userRow}> 
@@ -39,7 +52,9 @@ export default class Settings extends Component {
       </View>
     )
   }
-}
+
+
+export default Settings;
 
 const styles = StyleSheet.create({
   container: {

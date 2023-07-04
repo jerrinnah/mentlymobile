@@ -12,6 +12,9 @@ import ForgetPassword from '../screens/SignIn/ForgetPassword/ForgetPassword';
 import Dashboard from './Dashboard';
 import BootcampDetail from '../screens/Dashboard/AllBootCamps/BootcampDetail';
 import BootcampClass from '../components/Bootcamps/BootcampClass';
+import ProfileEdit from '../components/Settings/ProfileEdit';
+import Badges from '../components/Badges/Badges';
+import UpdatePassword from '../components/Settings/UpdatePassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +46,11 @@ const Authentication = () => {
           <Stack.Screen options={{ headerShown: false }} name='ForgetPassword' component={ForgetPassword} />
            <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
            <Stack.Screen options={{ headerShown: false }} name='BootcampDetail' component={BootcampDetail} />
-           <Stack.Screen options={{ headerShown: false }} name='BootcampClass' component={BootcampClass} />
+          <Stack.Screen options={{ headerShown: false }} name='BootcampClass' component={BootcampClass} />
+          <Stack.Screen options={{ headerShown: false }} name='Profile' component={ProfileEdit} />
+          <Stack.Screen options={{ headerShown: false }} name='Badge' component={Badges} />
+          <Stack.Screen options={{ headerShown: false }} name='Password' component={UpdatePassword} />
+          
       
       </Stack.Navigator>
   )

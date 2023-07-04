@@ -9,17 +9,15 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import RegularText from '../../components/SmallText/RegularText';
-import LongButton from '../../components/ButtonComponent.tsx/LongButton';
 import RegularButton from '../../components/Buttons/RegularButton';
 import Colors from '../../utils/Colors';
-import CustomTextFieldProps from '../../components/Forms/CustomTextFieldProps';
 import { useNavigation } from '@react-navigation/native';
 import Navigation from '../../navigation/Index';
 
 
 
 
-export default function MenteeSignup({Navigation}) {
+export default function MenteeSignup({navigation}) {
 
   
     const nav = useNavigation<any>();

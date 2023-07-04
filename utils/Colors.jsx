@@ -29,6 +29,9 @@ const Colors = {
   Grey200: '#4D4D4D',
   Grey300: '#C2C2C2',
   Grey400: '#E0E0E0',
+  Grey500: '#F6F6F6',
+  Grey600: '#FFFFFF',
+  
 
   Danger: 'red',
 };

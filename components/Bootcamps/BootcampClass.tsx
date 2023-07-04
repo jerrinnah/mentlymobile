@@ -7,6 +7,7 @@ import ShortButton from '../Buttons/ShortButton';
 import MidButton from '../Buttons/MidButton';
 import RegularButton from '../Buttons/RegularButton';
 import { useNavigation } from '@react-navigation/native';
+import BackArrowButton from '../Buttons/BackArrowButton';
 
 const BootcampClass = ({navigation}) => {
 
@@ -25,13 +26,7 @@ const BootcampClass = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <TouchableOpacity style={styles.box} onPress={returnHandler}> 
-          <Image
-            
-            style={styles.leftBtn}
-            source={require('../../res/icons/leftIconOrng.png')}
-          />
-        </TouchableOpacity>
+        <BackArrowButton onPress={returnHandler}/>
         <BigText style={styles.title}>Digital Marketing</BigText>
       </View>
 
