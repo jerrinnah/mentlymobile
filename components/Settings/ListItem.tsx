@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
 import RegularText from '../SmallText/RegularText'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ListItem = ({settingName, onPress, icon}) => {
   return (
-    <TouchableOpacity style={styles.listRow} onPress={onPress}>
+    <Pressable style={styles.listRow} onPress={onPress}>
           <View style={styles.userRow}> 
               <Image style={styles.userIcon} source={icon}/>
               <RegularText style={styles.settingStyle}>{settingName}</RegularText>
           </View>
           <Image style={styles.arrowIcon} source={require('../../res/icons/rightArrowBlack.png')}/>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 

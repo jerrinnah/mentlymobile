@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Touchable } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Touchable, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import BootCampItem from '../../../components/DashboardComponents/BootCampItem';
 import Colors from '../../../utils/Colors';
@@ -158,18 +158,19 @@ const Bootcamps = ({navigation}) => {
       <View>
         <SafeAreaView style={styles.flatlist}>
           <FlatList
-            bounces={true}
+          
+            bounces={false}
             showsVerticalScrollIndicator={false}
             data={camps}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={()=>(navigation.navigate('BootcampDetail', {item}))}>
+              <Pressable onPress={()=>(navigation.navigate('BootcampDetail', {item}))}>
                 <Item
                   title={item.title}
                   coverImage={item.coverImage}
                   createdAt={item.createdAt}
                   numOfActiveMentees={item.numOfActiveMentees} userCount={0}              />
-              </TouchableOpacity>
+              </Pressable>
             )}
           />
         </SafeAreaView>

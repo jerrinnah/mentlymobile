@@ -5,7 +5,9 @@ import {
   Button,
   Alert,
   StyleSheet,
+  SafeAreaView,
   Image,
+  KeyboardAvoidingView
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import RegularText from '../../components/SmallText/RegularText';
@@ -13,6 +15,7 @@ import RegularButton from '../../components/Buttons/RegularButton';
 import Colors from '../../utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 import Navigation from '../../navigation/Index';
+import { Platform } from 'react-native';
 
 
 
@@ -46,7 +49,8 @@ export default function MenteeSignup({navigation}) {
     
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.main}>
+    <KeyboardAvoidingView style={styles.containerKeyboard} behavior={ Platform.OS === 'ios' ? 'padding' : 'height'} >
       <View>
         <Image
           style={{ height: 45, width: 103 }}
@@ -57,7 +61,7 @@ export default function MenteeSignup({navigation}) {
         Enter your details as a mentee to create your account
       </RegularText>
 
-      {/* Form field  */}
+      {/* Form field  */} 
 
       <Controller
         control={control}
@@ -195,15 +199,32 @@ export default function MenteeSignup({navigation}) {
       </RegularButton>
 
       {/* <Button title="Submit" onPress={handleSubmit(onSubmit)} /> */}
-    </View>
+      </KeyboardAvoidingView>
+      </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    top: 80,
-    height: '100%',
+
+  main: {
+    flex: 1,
+    // backgroundColor: 'blue',
     alignItems: 'center',
+    justifyContent: 'center',
+    top:70,
+    
+  },
+  container: {
+    flex: 1,
+    width:'100%',
+    alignItems: 'center',
+    padding: 10,
+
+    
+  },
+  containerKeyboard: {
+    flex: 1,
+    alignItems:'center'
   },
   textInput: {
     paddingLeft: 10,
@@ -212,6 +233,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
     color: Colors.Grey200,
+    borderColor:Colors.Grey300,
   },
 
   inputContainer: {

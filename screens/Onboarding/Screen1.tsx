@@ -64,12 +64,13 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     display: 'flex',
-    height: '50%',
+    height: '30%',
     flexDirection: 'column',
     width: '100%',
     padding: 20,
     alignItems: 'center',
     // backgroundColor: 'green',
+    // bottom:40,
   },
 
   textColor: {

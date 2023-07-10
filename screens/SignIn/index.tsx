@@ -152,7 +152,7 @@ const SignIn = ({ navigation }) => {
                 onCheck={handleCheck}
               />
             ))}
-            {/* <RadioT/> */}
+         
           </View>
         </View>
       </Modal>
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginTop: 80,
+    marginTop: 50,
     height: 45,
     width: 104,
   },
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    top: 150,
+    top: 100,
   },
   welcomeTitle: {
     // top: 150,
