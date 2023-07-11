@@ -33,7 +33,8 @@ const Curricullum = ({ navigation }) => {
         </View>
       </View>
 
-      <ScrollView  horizontal={false}>
+      <View>
+      <ScrollView  >
         <CurriculumItem />
         <CurriculumItem />
         <CurriculumItem />
@@ -52,6 +53,9 @@ const Curricullum = ({ navigation }) => {
         <CurriculumItem />
         <CurriculumItem />
       </ScrollView>
+      </View>
+
+      
     </View>
   );
 };

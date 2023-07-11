@@ -72,6 +72,8 @@ const SignIn = ({ navigation }) => {
       if (index === 0) {
         nav.navigate('MenteeSignup');
         setModalVisible(false);
+      } if (index === 1) {
+        Alert.alert('COMING SOON')
       }
     },
     [activeIndex],

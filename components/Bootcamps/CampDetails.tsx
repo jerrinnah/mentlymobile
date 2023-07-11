@@ -6,6 +6,8 @@ import RegularButton from '../Buttons/RegularButton';
 import RegularText from '../SmallText/RegularText';
 import { useNavigation } from '@react-navigation/native';
 
+
+
 const CampDetails = ({id,end,desc,organizeBy,start,category,location, title, navigation}) => {
 
   const nav = useNavigation<any>();
@@ -26,8 +28,8 @@ const CampDetails = ({id,end,desc,organizeBy,start,category,location, title, nav
 
  
   return (
-    <View style={styles.container}>
-      <View style={styles.title}>
+    <>
+       <View style={styles.title}>
         <View>
           <Image
             style={styles.img}
@@ -48,6 +50,8 @@ const CampDetails = ({id,end,desc,organizeBy,start,category,location, title, nav
           </View>
         </View>
       </View>
+    <View style={styles.container}>
+     
 
       <View style={styles.bootcampDesc}>
         <Text style={styles.desc}>{desc}</Text>
@@ -111,8 +115,10 @@ const CampDetails = ({id,end,desc,organizeBy,start,category,location, title, nav
           </View>
         </View>
       </Modal>
-    </View>
-  );
+      </View>
+      </>
+      );
+    
 };
 
 export default CampDetails;
@@ -120,9 +126,9 @@ export default CampDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    // backgroundColor: 'blue',
+    width:'100%'
   },
   textContainer: {
     top: 20,

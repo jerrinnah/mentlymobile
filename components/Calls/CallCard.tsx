@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import Colors from '../../utils/Colors';
 import RegularText from '../SmallText/RegularText';
 import BigText from '../SmallText/BigText';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const CallCard = () => {
   return (
-    <View style={styles.callWidth}>
+    <TouchableOpacity style={styles.callWidth}>
           <View style={styles.time}>
              <RegularText>10:40</RegularText>
             <RegularText>Join</RegularText>
@@ -37,7 +38,7 @@ const CallCard = () => {
           </View>
           
         
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 import CallCard from '../../../components/Calls/CallCard';
 import BigText from '../../../components/SmallText/BigText';
 import RegularText from '../../../components/SmallText/RegularText';
@@ -22,10 +22,13 @@ const Calls = () => {
 
 
       <View>
+        <ScrollView>
         <CallCard />
         <CallCard />
         <CallCard />
         <CallCard />
+        <CallCard />
+        </ScrollView>
       </View>
     </View>
   );
