@@ -15,6 +15,7 @@ import BootcampClass from '../components/Bootcamps/BootcampClass';
 import ProfileEdit from '../components/Settings/ProfileEdit';
 import Badges from '../components/Badges/Badges';
 import UpdatePassword from '../components/Settings/UpdatePassword';
+import Curricullum from '../screens/Curricullum/Curricullum';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,6 +51,7 @@ const Authentication = () => {
           <Stack.Screen options={{ headerShown: false }} name='Profile' component={ProfileEdit} />
           <Stack.Screen options={{ headerShown: false }} name='Badge' component={Badges} />
           <Stack.Screen options={{ headerShown: false }} name='Password' component={UpdatePassword} />
+          <Stack.Screen options={{ headerShown: false }} name='Curricullum' component={Curricullum} />
           
       
       </Stack.Navigator>

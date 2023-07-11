@@ -18,6 +18,10 @@ const BootcampClass = ({navigation}) => {
     nav.navigate('Calls')
   );
 
+  const curicullumHandler = () => {
+    nav.navigate('Curricullum')
+  }
+
   const returnHandler = () => (
     navigation.goBack()
   )
@@ -39,8 +43,8 @@ const BootcampClass = ({navigation}) => {
         <MidButton onPress={callHandler} style={styles.callBtn}>
           <RegularText style={styles.callText}>Calls</RegularText>
         </MidButton>
-        <MidButton>
-          <RegularText>Curriculum</RegularText>
+        <MidButton onPress={curicullumHandler}>
+          <RegularText >Curriculum</RegularText>
         </MidButton>
       </View>
 
