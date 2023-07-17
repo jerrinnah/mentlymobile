@@ -4,7 +4,7 @@ import RegularText from '../../components/SmallText/RegularText'
 import RegularButton from '../../components/Buttons/RegularButton'
 import Colors from '../../utils/Colors'
 import { useNavigation } from '@react-navigation/native';
-// import UserSignin from './UserSignin/UserSignin'
+
 
 
 const OtpVerification = () => {

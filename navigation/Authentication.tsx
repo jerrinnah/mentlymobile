@@ -45,8 +45,8 @@ const Authentication = () => {
           <Stack.Screen options={{headerShown:false}} name='OtpVerification' component={OtpVerification}/>
           <Stack.Screen options={{headerShown:false}} name='LogIn' component={LogIn}/>
           <Stack.Screen options={{ headerShown: false }} name='ForgetPassword' component={ForgetPassword} />
-           <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
-           <Stack.Screen options={{ headerShown: false }} name='BootcampDetail' component={BootcampDetail} />
+          <Stack.Screen options={{ headerShown: false }} name='Dashboard' component={Dashboard} />
+          <Stack.Screen options={{ headerShown: false }} name='BootcampDetail' component={BootcampDetail} />
           <Stack.Screen options={{ headerShown: false }} name='BootcampClass' component={BootcampClass} />
           <Stack.Screen options={{ headerShown: false }} name='Profile' component={ProfileEdit} />
           <Stack.Screen options={{ headerShown: false }} name='Badge' component={Badges} />

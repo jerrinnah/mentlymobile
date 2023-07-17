@@ -1,31 +1,31 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  GestureResponderEvent,
-  Alert,
-  Modal,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, Modal } from 'react-native';
 import React, { useState } from 'react';
 import RegularText from '../../components/SmallText/RegularText';
 import RegularButton from '../../components/Buttons/RegularButton';
 import Colors from '../../utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 import LogIn from './UserSignin/LogIn';
+import CustomInput from '../../components/Forms/CustomInput';
+import { useForm, Controller } from 'react-hook-form';
+import CustomOtpInput from '../../components/Forms/CustomOtpInput';
 
 const OtpVerification = ({ navigation }) => {
   const [modal, setModal] = useState(false);
 
   const nav = useNavigation<any>();
 
+  const { control, handleSubmit } = useForm();
 
-  const Success = () => {
-      setModal(!modal);
-      setTimeout(() => {
-        setModal(false);
-      }, 5000);
-      nav.navigate('Dashboard')
+  const Success = data => {
+    // verify otp
+    console.log(data)
+
+    setModal(!modal);
+    setTimeout(() => {
+      setModal(false);
+    }, 5000);
+
+    nav.navigate('Dashboard');
   };
   const SuccessfulReg = () => {
     // return  Alert.prompt('Successful')
@@ -45,22 +45,69 @@ const OtpVerification = ({ navigation }) => {
 
       <View style={styles.frames}>
         <View style={styles.frame}>
-          <RegularText style={styles.code}>*</RegularText>
+          <CustomOtpInput
+            control={control}
+            rules={{
+              required: 'required',
+              max: {
+                value: 9,
+              },
+            }}
+            name="1"
+            placeholder="*"
+            keyboardType={'numeric'}
+          />
         </View>
         <View style={styles.frame}>
-          <RegularText style={styles.code}>*</RegularText>
+          <CustomOtpInput
+            control={control}
+            rules={{
+              required: 'required',
+              max: {
+                value: 1,
+              },
+            }}
+            name="2"
+            placeholder="*"
+            keyboardType={'numeric'}
+          />
         </View>
         <View style={styles.frame}>
-          <RegularText style={styles.code}>*</RegularText>
+          <CustomOtpInput
+            control={control}
+            rules={{
+              required: 'required',
+              max: {
+                value: 1,
+              },
+            }}
+            name="3"
+            placeholder="*"
+            keyboardType={'numeric'}
+          />
         </View>
         <View style={styles.frame}>
-          <RegularText style={styles.code}>*</RegularText>
+          <CustomOtpInput
+            control={control}
+            rules={{
+              required: 'required',
+              max: {
+                value: 1,
+              },
+            }}
+            name="4"
+            placeholder="*"
+            keyboardType={'numeric'}
+          />
         </View>
       </View>
 
       <RegularText>You can resend code in 30s</RegularText>
 
-      <RegularButton style={styles.verifyButton} onPress={Success}>
+      <RegularButton
+        style={styles.verifyButton}
+        onPress={handleSubmit(Success)}
+      >
         Verify
       </RegularButton>
 
@@ -79,11 +126,11 @@ const OtpVerification = ({ navigation }) => {
         >
           <View style={styles.whiteBg}>
             <Image
-              style={{ height: 150, width: 150, marginBottom:50, }}
+              style={{ height: 150, width: 150, marginBottom: 50 }}
               source={require('../../res/images/success.png')}
             />
-                      <RegularText style={styles.textColor}>Congratulations</RegularText>
-                      <RegularText>Your account is ready...🚀</RegularText>
+            <RegularText style={styles.textColor}>Congratulations</RegularText>
+            <RegularText>Your account is ready...🚀</RegularText>
           </View>
         </View>
       </Modal>
@@ -136,16 +183,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'red%',
   },
   textColor: {
-      color: 'black',
-      fontSize:25,
+    color: 'black',
+    fontSize: 25,
   },
 
   whiteBg: {
     height: '60%',
     width: '90%',
     backgroundColor: 'white',
-      borderRadius: 10,
-      justifyContent: 'center',
-    alignItems:'center'
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

@@ -34,28 +34,26 @@ const Curricullum = ({ navigation }) => {
       </View>
 
       <View>
-      <ScrollView  >
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-        <CurriculumItem />
-      </ScrollView>
+        <ScrollView>
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+          <CurriculumItem />
+        </ScrollView>
       </View>
-
-      
     </View>
   );
 };
