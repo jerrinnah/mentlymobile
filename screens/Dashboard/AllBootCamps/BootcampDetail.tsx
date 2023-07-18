@@ -1,17 +1,10 @@
 import {
   StyleSheet,
-  Text,
   View,
-  Image,
-  SafeAreaView,
-  Modal,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import RegularText from '../../../components/SmallText/RegularText';
-import BigText from '../../../components/SmallText/BigText';
 import Colors from '../../../utils/Colors';
-import RegularButton from '../../../components/Buttons/RegularButton';
 import axios from 'axios';
 import { FlatList } from 'react-native-gesture-handler';
 import CampDetails from '../../../components/Bootcamps/CampDetails';
@@ -105,8 +98,6 @@ const styles = StyleSheet.create({
     // backgroundColor:'orange'
   },
   title: {
-    //   paddingTop:20,
-    // backgroundColor: 'grey',
   },
   img: {
     height: 254,

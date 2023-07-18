@@ -64,8 +64,8 @@ const UpdatePassword = ({ navigation }) => {
       {
         isModalVisible ? 
           
-        <Modal transparent={true} animationType={'fade'} style={styles.modlSize}>
-        <TouchableOpacity style={styles.modalBgx} onPress={()=>setModalVisible(!isModalVisible)}>
+        <Modal  transparent={true} animationType={'fade'} style={styles.modlSize}>
+        <View style={styles.modalBgx}>
           <View style={styles.modalContainer1x}>
             <BigText>Logout</BigText>
 
@@ -81,12 +81,12 @@ const UpdatePassword = ({ navigation }) => {
                <Text>Cancel</Text>
               </MidButton>
               <MidButton style={styles.logoutBtn} onPress={()=>console.log('Pressed')}>
-                <RegularText style={{color: 'white'}} >Yes, Logout</RegularText>
+                <RegularText style={{color: 'white'}}>Update</RegularText>
               </MidButton>
    
             </View>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal> : null
          }
       

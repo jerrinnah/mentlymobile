@@ -71,9 +71,7 @@ const Home = () => {
 
   return (
     <>
-      {showNotification ? (
-        <AllNotifications navigation={useNavigation} />
-      ) : (
+    
         <View style={styles.container}>
           <View style={styles.topRow}>
             <View style={styles.user}>
@@ -84,7 +82,7 @@ const Home = () => {
                 </View>
 
                 <TouchableOpacity
-                  onPress={() => setShowNotification(!showNotification)}
+                  onPress={() => nav.navigate('notification')}
                 >
                   <Image
                     style={styles.bell}
@@ -129,7 +127,6 @@ const Home = () => {
             </View>
           </View>
         </View>
-      )}
     </>
   );
 };

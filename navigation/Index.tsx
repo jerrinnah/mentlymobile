@@ -2,11 +2,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Authentication from './Authentication';
+import Home from './Home';
 
 const Navigation = () => {
+  const [isLoggedin, setIsLoggedIn] = React.useState(true);
   return (
     <NavigationContainer>
-      <Authentication />
+      {!isLoggedin && <Authentication />}
+      { isLoggedin && <Home /> }
     </NavigationContainer>
   );
 };

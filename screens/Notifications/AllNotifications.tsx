@@ -16,11 +16,11 @@ type Navigate = {
 }
 
 const AllNotifications = ({navigation}) => {
-  // const nav = useNavigation();
+  const nav = useNavigation();
 
 const sendBack = () => {
   // Alert.alert('pused')
-  //  navigation.navigate('Dashboard')
+  nav.goBack();
 }
 
 
