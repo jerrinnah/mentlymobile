@@ -5,7 +5,7 @@ import Authentication from './Authentication';
 import Home from './Home';
 
 const Navigation = () => {
-  const [isLoggedin, setIsLoggedIn] = React.useState(true);
+  const [isLoggedin, setIsLoggedIn] = React.useState(false);
   return (
     <NavigationContainer>
       {!isLoggedin && <Authentication />}

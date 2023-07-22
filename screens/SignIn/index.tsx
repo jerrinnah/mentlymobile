@@ -8,6 +8,7 @@ import {
   Pressable,
   TextInput,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState, useMemo } from 'react';
 import BigText from '../../components/SmallText/BigText';
@@ -17,7 +18,7 @@ import Colors from '../../utils/Colors';
 import { Formik, Field, Form } from 'formik';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import StyledInput from '../../components/Inputs/StyledTextInput';
-import CustomTextFieldProps from '../../components/Forms/CustomTextFieldProps';
+import CustomTextFieldProps from '../../components/Forms/CustomInput';
 import SmallerText from '../../components/SmallText/SmallerText';
 import RadioButton from '../../components/Radio/RadioProp';
 import RadioT, { AccountTypePicker } from '../../components/Radio/RadioT';
@@ -96,6 +97,7 @@ const SignIn = ({ navigation }) => {
   };
 
   return (
+    <SafeAreaView>
     <View style={styles.container}>
       <View>
         <Image
@@ -158,7 +160,8 @@ const SignIn = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-    </View>
+      </View>
+      </SafeAreaView>
   );
 };
 
@@ -166,7 +169,7 @@ export default SignIn;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
   },
 

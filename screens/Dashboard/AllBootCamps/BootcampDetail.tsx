@@ -41,7 +41,7 @@ const Item = ({
     category={category}
     location={location}
     start={start}
-    end={end}
+    end={end} 
   />
 );
 const BootcampDetail = ({ route, navigation }) => {
@@ -52,7 +52,8 @@ const BootcampDetail = ({ route, navigation }) => {
   useEffect(() => {
     axios
       .get(
-        'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
+        'https://app.mymently.com/bootcamps/get-bootcamp/',
+        // 'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
       )
       .then(response => setCampdetail(response.data.data[0].bootcamps));
   }, []);

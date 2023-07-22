@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, Pressable, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import RegularText from '../../../components/SmallText/RegularText';
@@ -6,11 +6,43 @@ import RegularButton from '../../../components/Buttons/RegularButton';
 import Colors from '../../../utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 import ForgetPassword from '../ForgetPassword/ForgetPassword';
+import { useMutation, useQuery } from 'react-query';
+import axios from 'axios';
+
 
 
 
 const LogIn = () => {
   const [check, setCheck] = useState(false);
+
+  // const nav = useNavigation();
+
+  
+
+  // const id = 98
+
+  // const { isLoading: queryLoading, data, } = useQuery(['getQuery', id], () => axios.get(`hhttps://lendnqoneon.com/${id}`), {
+  //   onError: () => { },
+  //   onSuccess: () => { },
+  // })
+
+  const { isLoading, mutate, isError, isSuccess } = useMutation({
+    mutationFn: (data: any) => axios.post('https://app.mymently.com/auth/signin?entity=student', data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }),
+    onError: (error: any) => { 
+      console.log(error.response.data);
+      alert(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      alert(data.data.message);
+      console.log(data.data);
+      nav.navigate('Home')
+      
+    }
+  });
 
 
 
@@ -30,14 +62,13 @@ const LogIn = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
 
   const onSubmit = data => {
-    console.log(data);
-    // nav.navigate('OtpVerification')
+    mutate(data);
   };
 
   return (
@@ -70,9 +101,9 @@ const LogIn = () => {
               />
             </View>
           )}
-          name="username"
+          name="email"
         />
-        {errors.username && <Text>Username required.</Text>}
+        {errors.email && <Text>{errors.email.message}</Text>}
 
         <Controller
           control={control}
@@ -115,7 +146,8 @@ const LogIn = () => {
         style={[styles.button, styles.bgColor]}
         onPress={handleSubmit(onSubmit)}
       >
-        Confirm
+        {isLoading && <ActivityIndicator size='small' />}
+        { !isLoading && 'Confirm' }
       </RegularButton>
     </View>
   );

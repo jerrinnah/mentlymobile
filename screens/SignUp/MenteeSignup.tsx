@@ -9,40 +9,88 @@ import {
   Image,
   KeyboardAvoidingView,
 } from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
 import RegularText from '../../components/SmallText/RegularText';
-import RegularButton from '../../components/Buttons/RegularButton';
 import Colors from '../../utils/Colors';
 import { useNavigation } from '@react-navigation/native';
 import Navigation from '../../navigation/Index';
-import { Platform, ScrollView } from 'react-native';
-import Form from '../../components/Forms/Form';
-import CustomInput from '../../components/Forms/CustomInput';
+import { Platform, ScrollView, ActivityIndicator } from 'react-native';
+import * as yup from 'yup';
+import useForm from '../../hooks/useForm';
+import { CustomTextInput } from '../../components/form/CustomTextInput';
+import { SubmitButton } from '../../components/form/SubmitButton';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useMutation } from 'react-query';
+import RegularButton from '../../components/Buttons/RegularButton';
+
+
+
+const schema = yup.object({
+  username: yup.string().required(),
+  firstname: yup.string().required(),
+  lastname: yup.string().required(),
+  email: yup.string().email().required(),
+  phone: yup.string().required().max(11),
+  password: yup.string().required().min(8),
+  confirmPassword: yup.string().required().min(8),
+});
 
 export default function MenteeSignup({ navigation }) {
   const nav = useNavigation<any>();
 
+  const {isLoading, mutate, isError, isSuccess} = useMutation({
+    mutationFn: (data: any) => axios.post('https://app.mymently.com/auth/signup?entity=student', data, {
+      headers:{
+        'Content-Type': 'application/json',
+      }
+    }), 
+    onError: (error: any) => { 
+      console.log(error.response.data);
+      alert(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      alert(data.data.message);
+      console.log(data.data);
+      nav.navigate('LogIn')
+      
+    }
+  })
+
   const {
-    control,
-    handleSubmit,
+    renderForm,
     formState: { errors },
     watch,
-  } = useForm();
-
-  const password = watch('password');
+  } = useForm({
+    defaultValues: {
+      username: '',
+      firstname: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: schema,
+  });
 
   const onPressSignedIn = data => {
     //  Validate user
+    mutate({
+      ...data,
+      entity: 'mentee'
+    });
     console.log(data);
-    nav.navigate('OtpVerification');
+     
   };
 
-  return (
+
+
+
+  return renderForm(
     <SafeAreaView
       style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
     >
       <KeyboardAvoidingView
-        
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -57,131 +105,75 @@ export default function MenteeSignup({ navigation }) {
               Enter your details as a mentee to create your account
             </RegularText>
 
-            {/* Form field  */}
-
-            <View style={styles.main}>
-            <View>
-            </View>
-          
-
-            {/* Form fields  */}
-
-            <View style={{paddingTop:20}}>
-              <CustomInput
-                control={control}
-                rules={{ required: 'Username is required' }}
+            <View style={{ paddingTop: 20, width: '95%' }}>
+              <CustomTextInput
                 name="username"
-                placeholder="username"
-                // secureTextEntry={null}
+                placeholder="Username"
+                inputTitle={'Username'}
+                required={true}
               />
-              <CustomInput
-                control={control}
+              <View style={{ height: 15 }} />
+              <CustomTextInput
                 name="firstname"
-                placeholder="First Name"
-                // secureTextEntry={null}
+                placeholder="Firstnames"
+                inputTitle={'First Name'}
               />
-              <CustomInput
-                control={control}
+              <View style={{ height: 15 }} />
+              <CustomTextInput
                 name="lastname"
-                placeholder="Last Name"
-                // secureTextEntry={null}
+                placeholder="Lastname"
+                inputTitle={'Last Name'}
               />
-              <CustomInput
-                rules={{
-                  required: 'Email address is required',
-                  pattern: {
-                    value:
-                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    message: 'Invalid email format!',
-                  },
-                }}
-                control={control}
+              <View style={{ height: 15 }} />
+              <CustomTextInput
                 name="email"
-                placeholder="Email address"
-                // secureTextEntry={null}
+                placeholder="Email"
+                inputTitle={'Email'}
+                required={true}
               />
-              <CustomInput
-                rules={{ required: 'Please input phone number' }}
-                control={control}
-                name="phone"
-                placeholder="Phone Number"
+              <View style={{ height: 15 }} />
+              <CustomTextInput
+                name="phone" 
+                placeholder="Phone"
+                inputTitle={'Phone'}
+                required={true}
                 keyboardType={'numeric'}
-
-                // secureTextEntry={null}
               />
-              <CustomInput
-                control={control}
-                rules={{
-                  
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Password should be at least 6 characters long',
-                  },
-                }}
+              <View style={{ height: 15 }} />
+              <CustomTextInput
                 name="password"
-                placeholder="Create Password"
-                secureTextEntry
+                placeholder="Password"
+                isPassword
+                inputTitle={'Password'}
               />
-              <CustomInput
-                control={control}
-                rules={{ required: "Password doesn't match", validate: value => value === password || 'Password do not match' } }
+              <View style={{ height: 15 }} />
+              <CustomTextInput
                 name="confirmPassword"
                 placeholder="Confirm Password"
-                secureTextEntry
-                
+                isPassword
+                inputTitle={'Confirm Password'}
+                required={true}
               />
+              <View style={{ height: 15 }} />
             </View>
 
-            <RegularButton onPress={handleSubmit(onPressSignedIn)}>
-              {' '}
-              Submit{' '}
-            </RegularButton>
-          </View>
-
-            
+            <SubmitButton label="Submit" onSubmit={(data) => onPressSignedIn(data)}/>
+            {/* <RegularButton onPress={hanldeSubmit(onPressSignedIn)}> Submit</RegularButton> */}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
-
-    // <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //   <KeyboardAvoidingView
-    //     behavior={Platform.OS === 'ios' ? 'padding' : 'height'} >
-     
-    //     <ScrollView >
-         
-    //     </ScrollView>
-    //   </KeyboardAvoidingView>
-    // </SafeAreaView>
+    </SafeAreaView>,
   );
-
-  //   return (
-  //     <>
-  //       <Form/>
-  //     </>
-  //   )
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    // backgroundColor: 'blue',
+    // backgroundColor: 'orange',
     alignItems: 'center',
-    // justifyContent: 'center',
     top: 20,
-    // mpaddingBottom:30,
   },
-  container: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    padding: 10,
-  },
-  // containerKeyboard: {
-  //   flex: 1,
-  //   alignItems: 'center',
-  // },
+  
   textInput: {
     paddingLeft: 10,
     height: 50,

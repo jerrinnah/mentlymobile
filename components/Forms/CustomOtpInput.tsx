@@ -19,25 +19,32 @@ const CustomOtpInput = ({
         field: { value, onChange, onBlur },
         fieldState: { error },
       }) => (
-        <View style={{height:55, width:55,  borderWidth:2, borderRadius:10, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}>
+        <View
+          style={{
+            height: 55,
+            width: 55,
+            borderWidth: 2,
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'white',
+            borderColor: 'grey',
+          }}
+        >
           <TextInput
-            
             value={value}
             onChangeText={onChange}
             onBlur={onBlur}
             placeholder={placeholder}
-            style={[styles.textInput,
-              { borderColor: error ? 'red' : 'transparent' },
-            ]}
+            style={[styles.textInput, { borderColor: error ? 'red' : 'green' }]}
             secureTextEntry={secureTextEntry}
             keyboardType={keyboardType}
           />
-          {
-            error && 
-            <Text style={{color:'red', alignSelf:'stretch', padding:5, bottom:4,}}>{error.message || 'Error'}</Text>
-
-           }
-          
+          {error && (
+            <Text style={{ color: 'red', alignSelf: 'stretch', padding: 5 }}>
+              {error.message || 'Error'}
+            </Text>
+          )}
         </View>
       )}
     />
@@ -54,6 +61,5 @@ const styles = StyleSheet.create({
   textInput: {
     color: 'black',
     fontSize: 25,
-  }
- 
+  },
 });

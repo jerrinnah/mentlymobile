@@ -18,7 +18,7 @@ const OtpVerification = ({ navigation }) => {
 
   const Success = data => {
     // verify otp
-    console.log(data)
+    console.log(data);
 
     setModal(!modal);
     setTimeout(() => {
@@ -48,7 +48,6 @@ const OtpVerification = ({ navigation }) => {
           <CustomOtpInput
             control={control}
             rules={{
-              required: 'required',
               max: {
                 value: 9,
               },
@@ -62,7 +61,6 @@ const OtpVerification = ({ navigation }) => {
           <CustomOtpInput
             control={control}
             rules={{
-              required: 'required',
               max: {
                 value: 1,
               },
@@ -76,7 +74,6 @@ const OtpVerification = ({ navigation }) => {
           <CustomOtpInput
             control={control}
             rules={{
-              required: 'required',
               max: {
                 value: 1,
               },
@@ -90,7 +87,6 @@ const OtpVerification = ({ navigation }) => {
           <CustomOtpInput
             control={control}
             rules={{
-              required: 'required',
               max: {
                 value: 1,
               },
@@ -102,7 +98,7 @@ const OtpVerification = ({ navigation }) => {
         </View>
       </View>
 
-      <RegularText>You can resend code in 30s</RegularText>
+      <RegularText>You can resend code in 30sss</RegularText>
 
       <RegularButton
         style={styles.verifyButton}
@@ -154,16 +150,17 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   frame: {
-    height: 55,
-    width: 55,
-    borderWidth: 2,
-    borderColor: ' green',
-    opacity: 0.4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    top: 20,
-    margin: 3,
+    // height: 55,
+    // width: 55,
+    // borderWidth: 2,
+    // borderColor: ' green',
+    // opacity: 0.4,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // borderRadius: 10,
+    // top: 20,
+    // margin: 3,
+    // backgroundColor:'red'
   },
   code: {
     fontSize: 29,
@@ -180,7 +177,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: '100%',
     width: '100%',
-    backgroundColor: 'red%',
+    // backgroundColor: 'red',
   },
   textColor: {
     color: 'black',
@@ -194,5 +191,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor:'red'
   },
 });

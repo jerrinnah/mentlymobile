@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1C1D4E"
-      }
+      },
+      "package": "com.devnej.mentlymobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6ef61f3a-13bb-495e-b435-384f3322607d"
+      }
     }
   }
 }

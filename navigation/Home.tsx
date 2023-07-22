@@ -9,6 +9,7 @@ import ProfileEdit from '../components/Settings/ProfileEdit';
 import UpdatePassword from '../components/Settings/UpdatePassword';
 import Curricullum from '../screens/Curricullum/Curricullum';
 import BootcampDetail from '../screens/Dashboard/AllBootCamps/BootcampDetail';
+import axios from 'axios';
 
 const { Navigator, Screen  } = createNativeStackNavigator();
 

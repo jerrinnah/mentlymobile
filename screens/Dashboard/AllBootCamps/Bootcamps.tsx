@@ -144,7 +144,7 @@ const Bootcamps = ({navigation}) => {
   useEffect(() => {
     axios
       .get(
-        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=10',
+        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=20',
       )
       .then(response => setCamps(response.data.data[0].bootcamps));
   }, []);
