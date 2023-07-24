@@ -33,7 +33,7 @@ const Screen3 = ({setPage, navigation}) => {
           <Pressable onPress={(pressHandler)}>
             <Image
               style={styles.nextIcon}
-              source={require('../../res/icons/nextFlow.png')}
+              source={require('../../res/icons/nextFlow3.png')}
             />
           </Pressable>
         </View>
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       alignSelf: 'center',
       backgroundColor: Colors.White,
-      // justifyContent:'space-between'
     },
   
     imgContainer: {

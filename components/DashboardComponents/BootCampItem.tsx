@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import BootcampDetail from '../../screens/Dashboard/AllBootCamps/BootcampDetail';
 
-const coverImage = '../../res/images/campImg.png';
+// const coverImage = '../../res/images/campImg.png';
 
 const BootCampItem = ({ title, createdAt, coverImage, numOfActiveMentees }) => {
 

@@ -33,7 +33,7 @@ const Screen2 = ({setPage}) => {
           <Pressable onPress={() => setPage(2)}>
             <Image
               style={styles.nextIcon}
-              source={require('../../res/icons/nextFlow.png')}
+              source={require('../../res/icons/nextFlow2.png')}
             />
           </Pressable>
         </View>

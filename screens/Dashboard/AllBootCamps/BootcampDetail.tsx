@@ -52,10 +52,12 @@ const BootcampDetail = ({ route, navigation }) => {
   useEffect(() => {
     axios
       .get(
-        'https://app.mymently.com/bootcamps/get-bootcamp/',
+        // 'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
+        'https://app.mymently.com/bootcamps/get-bootcamp?title=nerdwork&orgid=3',
+        'https://app.mymently.com/bootcamps/get-bootcamp',
         // 'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
       )
-      .then(response => setCampdetail(response.data.data[0].bootcamps));
+      // .then(response => console.log(response.data.data));
   }, []);
 
   const item = route.params;

@@ -14,6 +14,12 @@ import { useNavigation } from '@react-navigation/native';
 import RegularText from '../../../components/SmallText/RegularText';
 import { Controller, useForm } from 'react-hook-form';
 import RegularButton from '../../../components/Buttons/RegularButton';
+import { Alert } from 'react-native';
+
+const recoverEmail = () => {
+  Alert.alert('Please check your email');
+  console.log('Recover');
+};
 
 const ForgetPassword = () => {
   const nav = useNavigation<any>();
@@ -71,7 +77,10 @@ const ForgetPassword = () => {
         name="email"
       />
       {errors.email && <Text>Username required.</Text>}
-      <RegularButton style={styles.submitButton}> Send</RegularButton>
+      <RegularButton onPress={recoverEmail} style={styles.submitButton}>
+        {' '}
+        Send
+      </RegularButton>
     </View>
   );
 };
@@ -80,13 +89,12 @@ export default ForgetPassword;
 
 const styles = StyleSheet.create({
   container: {
-    top: 80,
+   paddingTop:40,
     height: '100%',
     alignItems: 'center',
-    paddingLeft: 20,
-        paddingRight: 20,
-    // marginBottom:10,
-        // paddingBottom:20,
+    paddingLeft: 10,
+    paddingRight: 10,
+
   },
   topRow: {
     display: 'flex',
@@ -100,7 +108,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 5,
-    backgroundColor: Colors.NavyBlue400,
+    backgroundColor: Colors.Grey400,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -117,8 +125,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 320,
     borderRadius: 5,
-    borderWidth: 2,
+    borderWidth: 1,
     color: Colors.Grey200,
+    borderColor:Colors.Grey300
   },
 
   inputContainer: {

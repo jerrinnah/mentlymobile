@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from '@ailibs/feather-react-ts'
 
 
 // const Data = [
@@ -61,48 +62,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 //     },
 //   ];
 
-const DATA = [
-  {
-    id: '6',
-    title: 'Network Support Technician Certificate',
-    status: 'online',
-    date: '01 August 2013',
-    userCount: 530,
-    // coverImage: require('../../../res/images/daph-eiffel-tower.jpeg')
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'International Polytechnic Winter School',
-    date: '01 August 2013',
-    userCount: 942,
-    // coverImage: require('../../../res/images/daph-eiffel-tower.jpeg')
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Computer Networking - Local Area Networks and ',
-    date: '31 July 2011',
-    userCount: 144,
-  },
-  {
-    id: '58694a0f-3da1-471f-bds96-145571e29d72',
-    title:
-      'Cybersecurity: Managing Risk in the Information Age Online Short Course',
-    date: '01 Sept 2011',
-    userCount: 844,
-  },
-  {
-    id: '58694a0f-3da1-471f-bd9a6-145571e29d72',
-    title: 'Digitization of the Legal Sector',
-    date: '01 January 2013',
-    userCount: 1832,
-  },
-  {
-    id: '58694ae0f-3da1-471f-bd96-145571e29d72',
-    title: 'Applied Quantitative Methods to Analyse Business Data',
-    date: '01 August 2013',
-    userCount: 443,
-  },
-];
 
 type ItemProps = {
   title: string;
@@ -110,6 +69,7 @@ type ItemProps = {
   coverImage: URL;
   createdAt: string;
   numOfActiveMentees: number;
+
 };
 
 const Item = ({title,createdAt,coverImage,numOfActiveMentees,}: ItemProps) => (
@@ -133,6 +93,8 @@ export type Camp = {
   duration: number;
   createdAt: string;
   numOfActiveMentees: number;
+
+
   
 };
 
@@ -147,6 +109,8 @@ const Bootcamps = ({navigation}) => {
         'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=20',
       )
       .then(response => setCamps(response.data.data[0].bootcamps));
+      // .then(response =>
+      //   console.log(response.data.data[0]));
   }, []);
 
   return (
@@ -154,22 +118,24 @@ const Bootcamps = ({navigation}) => {
       <View style={styles.topBar}>
         <BigText style={styles.bootcampTitle}> All Bootcamps</BigText>
         <SearchBar />
+
+        
       </View>
       <View>
         <SafeAreaView style={styles.flatlist}>
           <FlatList
-          
             bounces={false}
             showsVerticalScrollIndicator={false}
             data={camps}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <Pressable onPress={()=>(navigation.navigate('BootcampDetail', {item}))}>
+              <Pressable onPress={()=> navigation.navigate('BootcampDetail', {item})}>
                 <Item
+                  
                   title={item.title}
                   coverImage={item.coverImage}
                   createdAt={item.createdAt}
-                  numOfActiveMentees={item.numOfActiveMentees} userCount={0}              />
+                  numOfActiveMentees={item.numOfActiveMentees} userCount={0}/>
               </Pressable>
             )}
           />

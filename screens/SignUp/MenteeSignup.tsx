@@ -23,8 +23,6 @@ import axios from 'axios';
 import { useMutation } from 'react-query';
 import RegularButton from '../../components/Buttons/RegularButton';
 
-
-
 const schema = yup.object({
   username: yup.string().required(),
   firstname: yup.string().required(),
@@ -38,23 +36,23 @@ const schema = yup.object({
 export default function MenteeSignup({ navigation }) {
   const nav = useNavigation<any>();
 
-  const {isLoading, mutate, isError, isSuccess} = useMutation({
-    mutationFn: (data: any) => axios.post('https://app.mymently.com/auth/signup?entity=student', data, {
-      headers:{
-        'Content-Type': 'application/json',
-      }
-    }), 
-    onError: (error: any) => { 
+  const { isLoading, mutate, isError, isSuccess } = useMutation({
+    mutationFn: (data: any) =>
+      axios.post('https://app.mymently.com/auth/signup?entity=student', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    onError: (error: any) => {
       console.log(error.response.data);
       alert(error.response.data.message);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       alert(data.data.message);
       console.log(data.data);
-      nav.navigate('LogIn')
-      
-    }
-  })
+      nav.navigate('LogIn');
+    },
+  });
 
   const {
     renderForm,
@@ -77,14 +75,10 @@ export default function MenteeSignup({ navigation }) {
     //  Validate user
     mutate({
       ...data,
-      entity: 'mentee'
+      entity: 'mentee',
     });
     console.log(data);
-     
   };
-
-
-
 
   return renderForm(
     <SafeAreaView
@@ -133,7 +127,7 @@ export default function MenteeSignup({ navigation }) {
               />
               <View style={{ height: 15 }} />
               <CustomTextInput
-                name="phone" 
+                name="phone"
                 placeholder="Phone"
                 inputTitle={'Phone'}
                 required={true}
@@ -157,7 +151,10 @@ export default function MenteeSignup({ navigation }) {
               <View style={{ height: 15 }} />
             </View>
 
-            <SubmitButton label="Submit" onSubmit={(data) => onPressSignedIn(data)}/>
+            <SubmitButton
+              label="Submit"
+              onSubmit={data => onPressSignedIn(data)}
+            />
             {/* <RegularButton onPress={hanldeSubmit(onPressSignedIn)}> Submit</RegularButton> */}
           </View>
         </ScrollView>
@@ -171,9 +168,10 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: 'orange',
     alignItems: 'center',
-    top: 20,
+    paddingTop: 40,
+    margin:10,
   },
-  
+
   textInput: {
     paddingLeft: 10,
     height: 50,

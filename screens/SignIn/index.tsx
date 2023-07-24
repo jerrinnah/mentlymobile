@@ -15,15 +15,7 @@ import BigText from '../../components/SmallText/BigText';
 import RegularText from '../../components/SmallText/RegularText';
 import RegularButton from '../../components/Buttons/RegularButton';
 import Colors from '../../utils/Colors';
-import { Formik, Field, Form } from 'formik';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import StyledInput from '../../components/Inputs/StyledTextInput';
-import CustomTextFieldProps from '../../components/Forms/CustomInput';
-import SmallerText from '../../components/SmallText/SmallerText';
-import RadioButton from '../../components/Radio/RadioProp';
-import RadioT, { AccountTypePicker } from '../../components/Radio/RadioT';
-import { RadioGroup } from 'react-native-radio-buttons-group';
-import Screen2 from '../Onboarding/Screen2';
+import { AccountTypePicker } from '../../components/Radio/RadioT';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -171,6 +163,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     alignItems: 'center',
+    // backgroundColor:'red'
   },
 
   logo: {

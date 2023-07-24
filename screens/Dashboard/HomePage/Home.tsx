@@ -5,6 +5,7 @@ import {
   Image,
   FlatList,
   Pressable,
+  SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Colors from '../../../utils/Colors';
@@ -16,18 +17,35 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import AllNotifications from '../../Notifications/AllNotifications';
 import { useNavigation } from '@react-navigation/native';
 
-const DATA = [
-  {
-    id: '6',
-    title: 'Abnormal structures added to the earth sphere',
-    status: 'online',
-    date: '01 August 2013',
-    userCount: 284,
-  },
-];
+// const DATA = [
+//   {
+//     id: '6',
+//     title: 'Abnormal structures added to the earth sphere',
+//     status: 'online',
+//     date: '01 August 2013',
+//     userCount: 284,
+//     coverImage:32,
+//   },
+// ];
 
-const baseUrl =
-  'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend';
+// const baseUrl =
+//   'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend';
+
+  export type Camp = {
+    id: string;
+    title: string;
+    desc: string;
+    coverImage: string;
+    category: string;
+    email: string;
+    phone: number;
+    active: boolean;
+    duration: number;
+    createdAt: string;
+    numOfActiveMentees: number;
+  
+    
+  };
 
 type ItemProps = {
   title: string;
@@ -37,11 +55,7 @@ type ItemProps = {
   numOfActiveMentees: number;
 };
 
-const Item = ({
-  title,
-  numOfActiveMentees,
-  coverImage,
-  createdAt,
+const Item = ({title,numOfActiveMentees,coverImage,createdAt,
 }: ItemProps) => (
   <BootCampItem
     title={title}
@@ -59,20 +73,21 @@ const Home = () => {
   const nav = useNavigation();
 
   const [showNotification, setShowNotification] = useState(false);
-  const [camps, setCamps] = useState([]);
+  const [camps, setCamps] = useState<Camp[]>([]);
 
   useEffect(() => {
     axios
       .get(
-        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=1',
+        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=3',
       )
+      // .then(response => console.log(response.data));
       .then(response => setCamps(response.data.data[0].bootcamps));
   }, []);
 
   return (
-    <>
     
-        <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        
           <View style={styles.topRow}>
             <View style={styles.user}>
               <View style={styles.topintro}>
@@ -81,21 +96,23 @@ const Home = () => {
                   <RegularText>John Smith 👋</RegularText>
                 </View>
 
-                <TouchableOpacity
+                <Pressable
                   onPress={() => nav.navigate('notification')}
                 >
                   <Image
                     style={styles.bell}
                     source={require('../../../res/icons/bell.png')}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </View>
-            <View style={styles.searchBar}>
+           
+      </View>
+      <View style={styles.searchBar}>
               <SearchBar />
             </View>
-          </View>
-          <View style={styles.courseAd}>
+      <View style={styles.courseAd}>
+        
             <Image
               style={{ width: 325, height: 180 }}
               source={require('../../../res/images/navBackground.png')}
@@ -111,23 +128,24 @@ const Home = () => {
             <View>
               <FlatList
                 showsVerticalScrollIndicator={false}
-                scrollEnabled={false}
+                scrollEnabled={true}
                 data={camps}
                 renderItem={({ item }) => (
                   <Item
                     title={item.title}
                     userCount={0}
-                    coverImage={item.coverImage}
                     createdAt={item.createdAt}
+                    coverImage={item.coverImage}
                     numOfActiveMentees={item.numOfActiveMentees}
-                  />
+                     />
                 )}
                 keyExtractor={item => item.id}
               />
             </View>
           </View>
-        </View>
-    </>
+      
+        </SafeAreaView>
+
   );
 };
 
@@ -135,17 +153,28 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: Colors.White,
-    justifyContent: 'flex-start',
-    paddingTop: 70,
-    alignItems: 'center',
+    // flex: 1,
+    // backgroundColor: Colors.White,
+    // justifyContent: 'flex-start',
+    // paddingTop: 70,
+    // alignItems: 'center',
+
+    flex:1,
+    display: 'flex',
+    flexDirection: 'column',
+    // backgroundColor: 'red',
+    justifyContent:'flex-start'
+   
   },
   topRow: {
-    height: '20%',
-    width: 340,
-    // backgroundColor: 'red',
-    justifyContent: 'space-between',
+
+    width: '100%',
+    // backgroundColor: 'blue',
+    // justifyContent: 'space-between',
+    paddingTop: 30,
+    paddingLeft:10,
+    paddingRight: 10,
+
   },
   topintro: {
     // backgroundColor: 'green',
@@ -155,6 +184,12 @@ const styles = StyleSheet.create({
   },
   greeting: {
     fontSize: 14,
+  },
+  searchBar: {
+    marginTop: 10,
+    marginBottom:20,
+    justifyContent: 'center', 
+    alignItems: 'center',
   },
   user: {
     display: 'flex',
@@ -168,7 +203,7 @@ const styles = StyleSheet.create({
   welcome: {
     height: 50,
     width: '50%',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     alignItems: 'flex-start',
     paddingLeft: 20,
   },
@@ -184,11 +219,7 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
   },
-  searchBar: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  
   courseAd: {
     height: 180,
     width: '100%',

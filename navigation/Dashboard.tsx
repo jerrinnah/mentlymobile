@@ -8,6 +8,9 @@ import Bootcamps from '../screens/Dashboard/AllBootCamps/Bootcamps';
 import Calls from '../screens/Dashboard/Calls/Calls';
 import Settings from '../screens/Dashboard/Settings/Settings';
 import { Icon } from '@fortawesome/fontawesome-svg-core';
+import Colors from '../utils/Colors';
+import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -28,11 +31,13 @@ let lightSettings = require('../res/icons/settings_light.png');
 const Dashboard = () => {
   const [isFocused, setIsFocused] = useState(false);
   return (
+    
     <Tab.Navigator>
       <Tab.Screen
         name="Feed"
         component={Home}
         options={{
+          tabBarActiveTintColor: Colors.NavyBlue100,
           headerShown: false,
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, focused }) =>
@@ -44,23 +49,31 @@ const Dashboard = () => {
         }}
       />
       <Tab.Screen
+        
         name="Bootcamps"
         component={Bootcamps}
         options={{
+          // tabBarStyle: { height: 50 },
+          // tabBarLabelStyle: {
+          //   height:15
+          // },
+          tabBarActiveTintColor: Colors.NavyBlue100,
           headerShown: false,
-          tabBarLabel: 'Bootcaamps',
+          tabBarLabel: 'Bootcamps',
           tabBarIcon: ({ color, focused }) =>
             focused ? (
-              <Image style={{ height: 25, width: 25 }} source={bootcamp} />
+              <Image style={{ height: 25, width: 25, }} source={bootcamp}  />
             ) : (
               <Image style={{ height: 25, width: 25 }} source={lighBootcamp} />
             ),
+       
         }}
       />
       <Tab.Screen
         name="Calls"
         component={Calls}
         options={{
+          tabBarActiveTintColor: Colors.NavyBlue100,
           headerShown: false,
           tabBarLabel: 'Calls',
           tabBarIcon: ({ color, focused }) =>
@@ -75,6 +88,7 @@ const Dashboard = () => {
         name="Settings"
         component={Settings}
         options={{
+          tabBarActiveTintColor: Colors.NavyBlue100,
           headerShown:false,
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, focused }) =>

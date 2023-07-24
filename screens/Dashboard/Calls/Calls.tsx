@@ -1,36 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
 import CallCard from '../../../components/Calls/CallCard';
 import BigText from '../../../components/SmallText/BigText';
 import RegularText from '../../../components/SmallText/RegularText';
 import Colors from '../../../utils/Colors';
 
-
-
 const Calls = () => {
   return (
-    <View style={styles.container}>
-    
+    <SafeAreaView>
+      <View  style={styles.container}>
+        <BigText style={styles.callsTitle}>All Calls</BigText>
 
-      <BigText style={styles.callsTitle}>All Calls</BigText>
+        <View style={styles.nextCallCard}>
+          <RegularText>Begins in 20 minutes 🔔</RegularText>
+          <CallCard />
+        </View>
 
-      <View>
-        <CallCard />
+        <BigText style={styles.schedule}>Scheduled Calls</BigText>
+
+        <View>
+          <ScrollView>
+            <CallCard />
+            <CallCard />
+            <CallCard />
+            <CallCard />
+            <CallCard />
+          </ScrollView>
+        </View>
       </View>
-
-      <BigText style={styles.schedule}>Scheduled Calls</BigText>
-
-
-      <View>
-        <ScrollView>
-        <CallCard />
-        <CallCard />
-        <CallCard />
-        <CallCard />
-        <CallCard />
-        </ScrollView>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -38,16 +43,9 @@ export default Calls;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    paddingTop: 70,
-    height: '100%',
-    width: '100%',
+    paddingTop: 40,
     alignItems: 'center',
-    // justifyContent: 'flex-start',
-    backgroundColor: 'white',
-    
-    
-   
+    backgroundColor: Colors.White,
   },
   img: {
     top: 20,
@@ -55,7 +53,13 @@ const styles = StyleSheet.create({
     width: 250,
   },
   callsTitle: {
-    marginBottom: 90,
+    // marginBottom: 90,
+  },
+  nextCallCard: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    // backgroundColor: 'blue',
+    marginTop:30,
   },
   subText: {
     marginTop: 40,
@@ -72,6 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
     alignSelf: 'flex-start',
-    paddingLeft:30
-  }
+    paddingLeft: 30,
+    // backgroundColor:'red'
+  },
 });
