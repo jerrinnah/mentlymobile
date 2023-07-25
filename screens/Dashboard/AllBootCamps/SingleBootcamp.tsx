@@ -1,11 +1,16 @@
-import { SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Colors from '../../../utils/Colors';
 import RegularButton from '../../../components/Buttons/RegularButton';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import arrowDown from '../../../assets/ionicons';
+import FontAwesome, { SolidIcons, RegularIcons, BrandIcons } from 'react-native-fontawesome';
 
-const SingleBootcamp = ({ route }) => {
+const SingleBootcamp = ({ route, navigation: { goBack } }) => {
   const [detail, setDetail] = useState();
+  const nav = useNavigation();
 
   const orgId = route.params.orgId;
   const title = route.params.bootTitle;
@@ -30,18 +35,24 @@ const SingleBootcamp = ({ route }) => {
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.contentColumn}>
+     
+      
+        <Ionicons onPress={goBack} style={styles.arrowBack} name="arrow-back" size={35} color="white" />
+
         <Image style={styles.img} source={{ uri: img }} />
       </View>
+     
 
       <View style={styles.textContent}>
-        <Text style={{ fontSize: 25 }}> {title}</Text>
+        <Text style={{ fontSize: 30, fontWeight:'700' }}> {title}</Text>
         {/* <Text> Organization id: {orgId}</Text> */}
 
         <View style={styles.textDesc}>
           <Text style={styles.organized}>Organised by: {organizer}</Text>
           <Text>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum
+            Lorem ipsum  sit amet consectetur, adipisicing elit. Harum
             dolore perspiciatis assumenda commodi eligendi eius? Beatae eligendi
             suscipit cumque velit aperiam dolorem inventore. Dolore atque cum
             odio, sit dolorem error?
@@ -61,6 +72,7 @@ const SingleBootcamp = ({ route }) => {
             <View style={styles.infoItem}>
               <Text style={styles.subTitle}>Bootcamp Type</Text>
               <Text>Virtual</Text>
+              
             </View>
           </View>
           <View>
@@ -79,7 +91,8 @@ const SingleBootcamp = ({ route }) => {
           </View>
         </View>
       </View>
-      <RegularButton onPress={null}>ApplyHere</RegularButton>
+      
+      <RegularButton onPress={null}>Apply Here</RegularButton>
     </View>
   );
 };
@@ -89,8 +102,9 @@ export default SingleBootcamp;
 const styles = StyleSheet.create({
   container: {
         flex: 1,
-      alignItems:'center'
+      alignItems:'center',
     // backgroundColor: 'grey',
+      marginBottom:50,
   },
   img: {
     minHeight: 274,
@@ -99,6 +113,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     // bottom: 30,
+    position: 'relative',
   },
   textContent: {
     paddingTop: 20,
@@ -109,7 +124,7 @@ const styles = StyleSheet.create({
   contentColumn: {
     flexDirection: 'row',
     width: '100%',
-    //   backgroundColor: 'blue',
+      // backgroundColor: 'blue',
     justifyContent: 'space-between',
   },
   subTitle: {
@@ -134,10 +149,16 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
     justifyContent: 'space-around',
     height: 200,
-    paddingTop: 30,
+
   },
   infoItem: {
     marginBottom: 10,
-    height: 50,
+
   },
+  arrowBack: {
+    position: 'absolute',
+    top: 50,
+    zIndex: 1,
+    left:20,
+  }
 });
