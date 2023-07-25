@@ -10,6 +10,7 @@ import UpdatePassword from '../components/Settings/UpdatePassword';
 import Curricullum from '../screens/Curricullum/Curricullum';
 import BootcampDetail from '../screens/Dashboard/AllBootCamps/BootcampDetail';
 import axios from 'axios';
+import SingleBootcamp from '../screens/Dashboard/AllBootCamps/SingleBootcamp';
 
 const { Navigator, Screen  } = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const Home = () => {
       <Screen options={{ headerShown: false }} name='Badge' component={Badges} />
       <Screen options={{ headerShown: false }} name='Password' component={UpdatePassword} />
       <Screen options={{ headerShown: false }} name='Curricullum' component={Curricullum} />
+      <Screen options={{ headerShown: false }} name='Singlebootcamp' component={SingleBootcamp} />
     </Navigator>
   )
 }

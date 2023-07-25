@@ -9,13 +9,7 @@ import MenteeSignup from '../screens/SignUp/MenteeSignup';
 import OtpVerification from '../screens/SignIn/OtpVerification';
 import LogIn from '../screens/SignIn/UserSignin/LogIn';
 import ForgetPassword from '../screens/SignIn/ForgetPassword/ForgetPassword';
-import Dashboard from './Dashboard';
-import BootcampDetail from '../screens/Dashboard/AllBootCamps/BootcampDetail';
-import BootcampClass from '../components/Bootcamps/BootcampClass';
-import ProfileEdit from '../components/Settings/ProfileEdit';
-import Badges from '../components/Badges/Badges';
-import UpdatePassword from '../components/Settings/UpdatePassword';
-import Curricullum from '../screens/Curricullum/Curricullum';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +28,8 @@ const Stack = createNativeStackNavigator();
 // }
 
 const Authentication = () => {
+  
+
   return (
    
       <Stack.Navigator screenOptions={{headerShown:false}}>

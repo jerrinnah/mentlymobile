@@ -60,7 +60,8 @@ const BootcampDetail = ({ route, navigation }) => {
       // .then(response => console.log(response.data.data));
   }, []);
 
-  const item = route.params;
+
+  // const item = route.params;
 
   return (
     <>
@@ -83,6 +84,9 @@ const BootcampDetail = ({ route, navigation }) => {
           )}
         />
       </View>
+      <View>
+        {route.title}
+      </View>
     </>
   );
 };
@@ -92,7 +96,6 @@ export default BootcampDetail;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
   },

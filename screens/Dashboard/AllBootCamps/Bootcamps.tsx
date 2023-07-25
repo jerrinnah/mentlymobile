@@ -69,10 +69,11 @@ type ItemProps = {
   coverImage: URL;
   createdAt: string;
   numOfActiveMentees: number;
+  orgId: string;
 
 };
 
-const Item = ({title,createdAt,coverImage,numOfActiveMentees,}: ItemProps) => (
+const Item = ({title,createdAt,coverImage,numOfActiveMentees, orgId}: ItemProps) => (
   <BootCampItem
     title={title}
     createdAt={createdAt}
@@ -83,6 +84,7 @@ const Item = ({title,createdAt,coverImage,numOfActiveMentees,}: ItemProps) => (
 
 export type Camp = {
   id: string;
+  orgId: string;
   title: string;
   desc: string;
   coverImage: URL;
@@ -93,13 +95,12 @@ export type Camp = {
   duration: number;
   createdAt: string;
   numOfActiveMentees: number;
-
-
-  
+  organizer: string;
+  location: string;
 };
 
-const Bootcamps = ({navigation}) => {
-  // const nav = useNavigation<any>();
+const Bootcamps = ({route}) => {
+  const nav = useNavigation<any>();
 
   const [camps, setCamps] = useState<Camp[]>([]);
 
@@ -109,8 +110,7 @@ const Bootcamps = ({navigation}) => {
         'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=20',
       )
       .then(response => setCamps(response.data.data[0].bootcamps));
-      // .then(response =>
-      //   console.log(response.data.data[0]));
+      // .then(response =>console.log(response.data.data[0].bootcamps));
   }, []);
 
   return (
@@ -118,8 +118,6 @@ const Bootcamps = ({navigation}) => {
       <View style={styles.topBar}>
         <BigText style={styles.bootcampTitle}> All Bootcamps</BigText>
         <SearchBar />
-
-        
       </View>
       <View>
         <SafeAreaView style={styles.flatlist}>
@@ -129,13 +127,26 @@ const Bootcamps = ({navigation}) => {
             data={camps}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
-              <Pressable onPress={()=> navigation.navigate('BootcampDetail', {item})}>
+              <Pressable onPress={() => nav.navigate('Singlebootcamp', {
+                orgId: item.orgId,
+                bootTitle: item.title,
+                orgDesc: item.desc,
+                orgPhone: item.phone,
+                orgCategory: item.phone,
+                activeMentees: item.numOfActiveMentees,
+                orgOrganizer: item.organizer,
+                bootcampImg: item.coverImage,
+                campVenue: item.location,
+                date: item.createdAt,
+                campCategory: item.category,
+
+            
+              })}>
                 <Item
-                  
                   title={item.title}
                   coverImage={item.coverImage}
                   createdAt={item.createdAt}
-                  numOfActiveMentees={item.numOfActiveMentees} userCount={0}/>
+                  numOfActiveMentees={item.numOfActiveMentees} userCount={0} orgId={item.orgId}/>
               </Pressable>
             )}
           />
