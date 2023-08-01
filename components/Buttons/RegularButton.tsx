@@ -7,7 +7,7 @@ import RegularText from '../SmallText/RegularText';
 
 const ButtonView = styled.TouchableOpacity`
   background-color: ${Colors.Orange100};
-  width: 325px;
+  width: 365px;
   height: 52px;
   padding: 15px;
   border-radius: 5px;

@@ -50,6 +50,18 @@ export const useUtils = create<LogginInState>((set) => ({
 }));
 
 
+// Toggle state for show more curriculum 
+
+type toggleState = {
+    isToggled: boolean;
+    setAll: (data: boolean) => void
+}
+
+export  const showDetails = create<toggleState>((set) => ({
+    isToggled: false,
+    setAll:(data: boolean) => set((s) => ({isToggled: data}))
+}))
+
 
 const bootcampStore = (set) => ({
     user: [],

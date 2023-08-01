@@ -13,6 +13,9 @@ import RegularButton from '../../../components/Buttons/RegularButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { useUser } from '../../../store/store';
+import BigText from '../../../components/SmallText/BigText';
+import { ScrollView } from 'react-native-gesture-handler';
+import CurIntro from '../../../components/Curriculum/CurIntro';
 
 const SingleBootcamp = ({ route, navigation: { goBack } }) => {
   const user = useUser(state => state);
@@ -69,10 +72,10 @@ const SingleBootcamp = ({ route, navigation: { goBack } }) => {
     );
   };
 
-  console.log(user.user.firstname)
-  console.log(user.user.email)
-  console.log(user.user.phone)
-  console.log(bootTitle)
+  console.log(user.user.firstname);
+  console.log(user.user.email);
+  console.log(user.user.phone);
+  console.log(bootTitle);
 
   return (
     <View style={styles.container}>
@@ -103,45 +106,54 @@ const SingleBootcamp = ({ route, navigation: { goBack } }) => {
           </Text>
         </View>
 
-        <View style={styles.titleBorder}>
-            <Text>Curriculum</Text>
-          </View>
+        <View style={{ height: 300, justifyContent:'center', alignItems:'center'}}>
+          <ScrollView>
+            <View style={styles.titleBorder}>
+              <BigText style={{ fontSize: 18, color: Colors.NavyBlue100 }}>
+                Overview
+              </BigText>
+            </View>
 
-        <View style={styles.column}>
-         
-          <View>
-            <View style={styles.infoItem}>
-              <Text style={styles.subTitle}>Date</Text>
-              {/* <Text> {date}</Text> */}
-              <View style={styles.date}>
-                <Text>{postedDay}-</Text>
-                <Text>{postedMonth}-</Text>
-                <Text>{postedYear}</Text>
+            <View style={styles.column}>
+              <View>
+                <View style={styles.infoItem}>
+                  <Text style={styles.subTitle}>Date</Text>
+                  {/* <Text> {date}</Text> */}
+                  <View style={styles.date}>
+                    <Text>{postedDay}-</Text>
+                    <Text>{postedMonth}-</Text>
+                    <Text>{postedYear}</Text>
+                  </View>
+                </View>
+                <View style={styles.infoItem}>
+                  <Text style={styles.subTitle}>Language</Text>
+                  <Text>English</Text>
+                </View>
+                <View style={styles.infoItem}>
+                  <Text style={styles.subTitle}>Bootcamp Type</Text>
+                  <Text>Virtual</Text>
+                </View>
+              </View>
+              <View>
+                <View style={styles.infoItem}>
+                  <Text style={styles.subTitle}>Time</Text>
+                  <Text>9:00am</Text>
+                </View>
+                <View style={styles.infoItem}>
+                  <Text style={styles.subTitle}>Category</Text>
+                  <Text>{category}</Text>
+                </View>
+                <View style={styles.infoItem}>
+                  <Text style={styles.subTitle}>Venue</Text>
+                  <Text>{venue}</Text>
+                </View>
               </View>
             </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.subTitle}>Language</Text>
-              <Text>English</Text>
+
+            <View style={styles.curriculumContainer}>
+              <CurIntro/>
             </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.subTitle}>Bootcamp Type</Text>
-              <Text>Virtual</Text>
-            </View>
-          </View>
-          <View>
-            <View style={styles.infoItem}>
-              <Text style={styles.subTitle}>Time</Text>
-              <Text>9:00am</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.subTitle}>Category</Text>
-              <Text>{category}</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.subTitle}>Venue</Text>
-              <Text>{venue}</Text>
-            </View>
-          </View>
+          </ScrollView>
         </View>
       </View>
 
@@ -201,8 +213,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     // backgroundColor: 'green',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     height: 200,
+    marginLeft: 40,
+    marginRight: 40,
+    marginBottom: 100,
+    // paddingBottom:60,
   },
   infoItem: {
     marginBottom: 10,
@@ -218,8 +234,24 @@ const styles = StyleSheet.create({
   },
 
   titleBorder: {
-    height: 30,
-    width: 325,
-    backgroundColor:'red'
-  }
+    height: 40,
+    width: '100%',
+    backgroundColor: Colors.Grey400,
+    justifyContent: 'center',
+    paddingLeft: 20,
+    marginBottom: 20,
+    marginTop: 20,
+
+
+  },
+  curriculumContainer: {
+    height: 256,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    // backgroundColor: 'blue', 
+    // margin: 10,
+    // marginBottom: 50,
+    paddingBottom:5,
+
+  },
 });
