@@ -16,6 +16,7 @@ import axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AllNotifications from '../../Notifications/AllNotifications';
 import { useNavigation } from '@react-navigation/native';
+import { useUser } from '../../../store/store';
 
 // const DATA = [
 //   {
@@ -69,8 +70,12 @@ const Item = ({title,numOfActiveMentees,coverImage,createdAt,
 
 // }
 
-const Home = () => {
+const Home = ({route}) => {
+
+  // const { userName } = route.params;
+
   const nav = useNavigation();
+  const { user } = useUser((state) => state)
 
   const [showNotification, setShowNotification] = useState(false);
   const [camps, setCamps] = useState<Camp[]>([]);
@@ -93,7 +98,7 @@ const Home = () => {
               <View style={styles.topintro}>
                 <View style={styles.welcome}>
                   <RegularText style={styles.greeting}>Hello,</RegularText>
-                  <RegularText>John Smith 👋</RegularText>
+                  <RegularText>{user.username} 👋</RegularText>
                 </View>
 
                 <Pressable

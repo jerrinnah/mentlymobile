@@ -3,13 +3,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Authentication from './Authentication';
 import Home from './Home';
+import { useUtils } from '../store/store';
 
 const Navigation = () => {
-  const [isLoggedin, setIsLoggedIn] = React.useState(true);
+  const { isLoggedIn } = useUtils((state) => state)
   return (
     <NavigationContainer>
-      {!isLoggedin && <Authentication />}
-      { isLoggedin && <Home /> }
+      {!isLoggedIn && <Authentication />}
+      { isLoggedIn && <Home /> }
     </NavigationContainer>
   );
 };

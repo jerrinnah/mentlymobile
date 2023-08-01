@@ -65,11 +65,13 @@ import Icon from '@ailibs/feather-react-ts'
 
 type ItemProps = {
   title: string;
-  userCount: number;
+  userCount: string;
   coverImage: URL;
   createdAt: string;
-  numOfActiveMentees: number;
+  numOfActiveMentees: string;
   orgId: string;
+  id: number;
+ 
 
 };
 
@@ -94,9 +96,10 @@ export type Camp = {
   active: boolean;
   duration: number;
   createdAt: string;
-  numOfActiveMentees: number;
+  numOfActiveMentees: string;
   organizer: string;
   location: string;
+  userCount: string;
 };
 
 const Bootcamps = ({route}) => {
@@ -107,9 +110,14 @@ const Bootcamps = ({route}) => {
   useEffect(() => {
     axios
       .get(
-        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=20',
+        'https://app.mymently.com/bootcamps/list-bootcamps?category=frontend&take=70',
       )
-      .then(response => setCamps(response.data.data[0].bootcamps));
+      .then(response => {
+        console.log(response.data.data[0].bootcamps[0].id);
+        console.log(response.data.data[0].bootcamps[0]);
+     
+        setCamps(response.data.data[0].bootcamps);
+      });
       // .then(response =>console.log(response.data.data[0].bootcamps));
   }, []);
 
@@ -128,6 +136,7 @@ const Bootcamps = ({route}) => {
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <Pressable onPress={() => nav.navigate('Singlebootcamp', {
+                id: item.id,
                 orgId: item.orgId,
                 bootTitle: item.title,
                 orgDesc: item.desc,
@@ -145,8 +154,10 @@ const Bootcamps = ({route}) => {
                 <Item
                   title={item.title}
                   coverImage={item.coverImage}
+                  // createdAt={item.createdAt}
                   createdAt={item.createdAt}
-                  numOfActiveMentees={item.numOfActiveMentees} userCount={0} orgId={item.orgId}/>
+            
+                  userCount={item.numOfActiveMentees} orgId={item.orgId} numOfActiveMentees={item.numOfActiveMentees} />
               </Pressable>
             )}
           />

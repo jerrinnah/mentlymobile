@@ -50,7 +50,9 @@ export default function MenteeSignup({ navigation }) {
     onSuccess: data => {
       alert(data.data.message);
       console.log(data.data);
-      nav.navigate('LogIn');
+      nav.navigate('LogIn', {
+        userName: 'NewUser'
+      });
     },
   });
 

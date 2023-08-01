@@ -1,69 +1,123 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Colors from '../../../utils/Colors';
 import RegularButton from '../../../components/Buttons/RegularButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import arrowDown from '../../../assets/ionicons';
-import FontAwesome, { SolidIcons, RegularIcons, BrandIcons } from 'react-native-fontawesome';
+import { useUser } from '../../../store/store';
 
 const SingleBootcamp = ({ route, navigation: { goBack } }) => {
+  const user = useUser(state => state);
+
+  // const applyHandler=> {
+
+  // }skippT55ed
+
   const [detail, setDetail] = useState();
   const nav = useNavigation();
 
-  const orgId = route.params.orgId;
-  const title = route.params.bootTitle;
-  const organizer = route.params.orgOrganizer;
-  const phone = route.params.orgPhone;
-  const desc = route.params.orgDesc;
-  const date = route.params.activeMentees;
-  const activeMentees = route.params.activeMentees;
-  const img = route.params.bootcampImg;
-  const category = route.params.campCategory;
-  const campDate = route.params.date;
-  const venue = route.params.campVenue;
+  // Recieveing the data from bootcampscreen
+  const {
+    id,
+    orgId,
+    bootTitle,
+    organizer,
+    phone,
+    desc,
+    date,
+    activeMentees,
+    img,
+    category,
+    campDate,
+    venue,
+  } = route.params;
 
-  //   useEffect(() => {
-  //     axios
-  //       .get(
-  //         'https://app.mymently.com/bootcamps/get-bootcamp/?title=test bootcamp&orgId=7',
-  //       )
-  //       .then(response => setDetail(response.data.data[0]));
-  //     //   .then(response => console.log(response.data.data));
-  //   }, []);
+  let createdDate = date;
+  let postedTime = new Date(createdDate).getTime();
+  let postedDay = new Date(createdDate).getDay();
+  let postedMonth = new Date(createdDate).getMonth() + 1;
+  let postedYear = new Date(postedTime).getFullYear();
+
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       'https://app.mymently.com/bootcamps/get-bootcamp/?title=test bootcamp&orgId=7',
+  //     )
+  //     .then(response => setDetail(response.data.data[0]));
+  //   //   .then(response => console.log(response.data.data));
+  // }, []);
+
+  const func = async () => {
+    const response = await axios.post(
+      `https://app.mymently.com/bootcamps/request-access/`,
+      {
+        menteeName: user.user.firstname,
+        menteeEmail: user.user.email,
+        phone: user.user.phone,
+        bootcampTitle: bootTitle,
+      },
+
+      // nav.navigate('home')
+    );
+  };
+
+  console.log(user.user.firstname)
+  console.log(user.user.email)
+  console.log(user.user.phone)
+  console.log(bootTitle)
 
   return (
     <View style={styles.container}>
-      
       <View style={styles.contentColumn}>
-     
-      
-        <Ionicons onPress={goBack} style={styles.arrowBack} name="arrow-back" size={35} color="white" />
+        <Ionicons
+          onPress={goBack}
+          style={styles.arrowBack}
+          name="arrow-back"
+          size={35}
+          color="white"
+        />
 
         <Image style={styles.img} source={{ uri: img }} />
       </View>
-     
 
       <View style={styles.textContent}>
-        <Text style={{ fontSize: 30, fontWeight:'700' }}> {title}</Text>
+        <Text style={{ fontSize: 30, fontWeight: '700' }}> {bootTitle}</Text>
         {/* <Text> Organization id: {orgId}</Text> */}
 
         <View style={styles.textDesc}>
+          <Text>{id}</Text>
           <Text style={styles.organized}>Organised by: {organizer}</Text>
           <Text>
-            Lorem ipsum  sit amet consectetur, adipisicing elit. Harum
-            dolore perspiciatis assumenda commodi eligendi eius? Beatae eligendi
+            Lorem ipsum sit amet consectetur, adipisicing elit. Harum dolore
+            perspiciatis assumenda commodi eligendi eius? Beatae eligendi
             suscipit cumque velit aperiam dolorem inventore. Dolore atque cum
             odio, sit dolorem error?
           </Text>
         </View>
 
+        <View style={styles.titleBorder}>
+            <Text>Curriculum</Text>
+          </View>
+
         <View style={styles.column}>
+         
           <View>
             <View style={styles.infoItem}>
               <Text style={styles.subTitle}>Date</Text>
-              <Text> {campDate}</Text>
+              {/* <Text> {date}</Text> */}
+              <View style={styles.date}>
+                <Text>{postedDay}-</Text>
+                <Text>{postedMonth}-</Text>
+                <Text>{postedYear}</Text>
+              </View>
             </View>
             <View style={styles.infoItem}>
               <Text style={styles.subTitle}>Language</Text>
@@ -72,7 +126,6 @@ const SingleBootcamp = ({ route, navigation: { goBack } }) => {
             <View style={styles.infoItem}>
               <Text style={styles.subTitle}>Bootcamp Type</Text>
               <Text>Virtual</Text>
-              
             </View>
           </View>
           <View>
@@ -91,8 +144,9 @@ const SingleBootcamp = ({ route, navigation: { goBack } }) => {
           </View>
         </View>
       </View>
-      
-      <RegularButton onPress={null}>Apply Here</RegularButton>
+
+      {/* <RegularButton onPress={() => func('hey')}>Apply Here</RegularButton> */}
+      <RegularButton onPress={func}>Apply Here</RegularButton>
     </View>
   );
 };
@@ -101,10 +155,10 @@ export default SingleBootcamp;
 
 const styles = StyleSheet.create({
   container: {
-        flex: 1,
-      alignItems:'center',
+    flex: 1,
+    alignItems: 'center',
     // backgroundColor: 'grey',
-      marginBottom:50,
+    marginBottom: 50,
   },
   img: {
     minHeight: 274,
@@ -124,7 +178,7 @@ const styles = StyleSheet.create({
   contentColumn: {
     flexDirection: 'row',
     width: '100%',
-      // backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     justifyContent: 'space-between',
   },
   subTitle: {
@@ -149,16 +203,23 @@ const styles = StyleSheet.create({
     // backgroundColor: 'green',
     justifyContent: 'space-around',
     height: 200,
-
   },
   infoItem: {
     marginBottom: 10,
-
   },
   arrowBack: {
     position: 'absolute',
     top: 50,
     zIndex: 1,
-    left:20,
+    left: 20,
+  },
+  date: {
+    flexDirection: 'row',
+  },
+
+  titleBorder: {
+    height: 30,
+    width: 325,
+    backgroundColor:'red'
   }
 });

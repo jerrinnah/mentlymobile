@@ -16,10 +16,14 @@ import { useNavigation } from '@react-navigation/native';
 import ForgetPassword from '../ForgetPassword/ForgetPassword';
 import { useMutation, useQuery } from 'react-query';
 import axios from 'axios';
+import { useUser, useUtils } from '../../../store/store';
 
-const LogIn = () => {
+const LogIn = ({route}) => {
   const [check, setCheck] = useState(false);
   const [show, setShow] = useState(false);
+  const { user, accessToken, setAll } = useUser((state) => state);
+  const { setAll: setLoggedInState } = useUtils((state) => state)
+
 
   // const nav = useNavigation();
 
@@ -44,7 +48,9 @@ const LogIn = () => {
     onSuccess: data => {
       alert(data.data.message);
       console.log(data.data);
-      nav.navigate('Home');
+      const newData = data.data.data;
+      setAll({ accessToken: newData[0].access_token, user: newData[1] })
+      setLoggedInState(true)
     },
   });
 
@@ -91,7 +97,7 @@ const LogIn = () => {
           }}
           render={({ field: { onChange, onBlur, value } }) => (
             <View style={styles.inputContainer}>
-              <RegularText>Username</RegularText>
+              <RegularText>email address</RegularText>
               <TextInput
                 // placeholder="First name"
                 onBlur={onBlur}

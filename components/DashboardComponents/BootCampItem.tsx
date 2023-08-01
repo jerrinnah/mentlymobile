@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Alert } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RegularText from '../SmallText/RegularText';
 import BigText from '../SmallText/BigText';
 import Colors from '../../utils/Colors';
@@ -9,10 +9,20 @@ import BootcampDetail from '../../screens/Dashboard/AllBootCamps/BootcampDetail'
 
 // const coverImage = '../../res/images/campImg.png';
 
+
+
 const BootCampItem = ({ title, createdAt, coverImage, numOfActiveMentees }) => {
+  
+  let campDate = createdAt;
+  let postedTime = new Date(campDate).getTime();
+  let postedDay = new Date(createdAt).getDay();
+  let postedMonth = new Date(createdAt).getMonth() + 1;
+  let postedYear = new Date(postedTime).getFullYear();
+
+  
 
   const nav = useNavigation<any>();
-  
+
   return (
     <View style={styles.bootCampContainer}>
       <Image style={styles.img} source={{ uri: coverImage }} />
@@ -32,7 +42,11 @@ const BootCampItem = ({ title, createdAt, coverImage, numOfActiveMentees }) => {
                 source={require('../../res/icons/clock-time.png')}
               />
             </View>
-            <Text>{createdAt}</Text>
+            <View style={styles.date}>
+             <Text>{postedDay}-</Text>
+              <Text>{postedMonth}-</Text>
+              <Text>{postedYear}</Text>
+            </View>
           </View>
           <View style={styles.userContainer}>
             <Image
@@ -130,9 +144,10 @@ const styles = StyleSheet.create({
   dateContainer: {
     display: 'flex',
     flexDirection: 'row',
-    width: '40%',
+    width: '30%',
     alignItems: 'center',
     justifyContent: 'space-around',
+    // backgroundColor:'yellow'
   },
 
   userContainer: {
@@ -151,5 +166,10 @@ const styles = StyleSheet.create({
   },
   userCount: {
     fontSize: 12,
+  },
+
+  date: {
+    display: 'flex',
+    flexDirection: 'row',
   },
 });
