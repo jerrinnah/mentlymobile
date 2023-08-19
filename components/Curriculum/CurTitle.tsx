@@ -1,11 +1,17 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import React, { useState } from 'react';
 import BigText from '../SmallText/BigText';
 import RegularText from '../SmallText/RegularText';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Icon } from '@ailibs/feather-react-ts';
 
-const CurTitle = () => {
+import { useToggle } from '../../store/store';
+
+const CurTitle = ({ onPress }) => {
+  const isToggled = useToggle(state => state.isToggled);
+
+  // const [collapse, setCollapse] = useState(false);
+
   return (
     <>
       <View style={styles.top}>
@@ -14,15 +20,29 @@ const CurTitle = () => {
         <BigText style={styles.title}>
           Introduction to Digital marketing{' '}
         </BigText>
-        <View style={styles.iconContainer}>
+        <Pressable onPress={onPress} style={styles.iconContainer}>
           {/* <Ionicons name='arrow-up'/> */}
-          <Image
-            style={styles.icon}
-            source={require('../../res/icons/arrow-up.png')}
-          />
-        </View>
-          </View>
-          <View style={{height:1, width:'80%', backgroundColor:'grey', alignSelf:'center'}}></View>
+          {isToggled ? (
+            <Image
+              style={styles.icon}
+              source={require('../../res/icons/arrow-dwn.png')}
+            />
+          ) : (
+            <Image
+              style={styles.icon}
+              source={require('../../res/icons/arrow-up.png')}
+            />
+          )}
+        </Pressable>
+      </View>
+      <View
+        style={{
+          height: 1,
+          width: '80%',
+          backgroundColor: 'grey',
+          alignSelf: 'center',
+        }}
+      ></View>
     </>
   );
 };
@@ -33,10 +53,9 @@ const styles = StyleSheet.create({
   top: {
     flexDirection: 'row',
     padding: 10,
-        alignItems: 'center',
-        marginBottom: 10,
-        marginTop:20
-
+    alignItems: 'center',
+    marginBottom: 10,
+    marginTop: 20,
   },
   title: {
     fontSize: 18,

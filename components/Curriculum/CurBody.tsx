@@ -6,10 +6,10 @@ import RegularText from '../SmallText/RegularText';
 const CurBody = () => {
   return (
     <View style={styles.container}>
-      <RegularText style={styles.text}>
+      {/* <RegularText style={styles.text}>
         This class covers html css and the basic forms of a static website &
         basic forms of a statistics of website Lorem ipsum amet minim mollit non
-      </RegularText>
+      </RegularText> */}
     </View>
   );
 };

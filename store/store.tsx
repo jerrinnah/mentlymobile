@@ -57,10 +57,12 @@ type toggleState = {
     setAll: (data: boolean) => void
 }
 
-export  const showDetails = create<toggleState>((set) => ({
-    isToggled: false,
+export const useToggle= create<toggleState>((set) => ({
+    isToggled: true,
     setAll:(data: boolean) => set((s) => ({isToggled: data}))
 }))
+
+
 
 
 const bootcampStore = (set) => ({

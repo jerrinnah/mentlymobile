@@ -54,7 +54,7 @@ const BootcampDetail = ({ route, navigation }) => {
       .get(
         // 'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
         'https://app.mymently.com/bootcamps/get-bootcamp?title=nerdwork&orgid=3',
-        'https://app.mymently.com/bootcamps/get-bootcamp',
+        // 'https://app.mymently.com/bootcamps/get-bootcamp',
         // 'https://app.mymently.com/bootcamps/get-bootcamp?title=test bootcamp',
       )
       // .then(response => console.log(response.data.data));

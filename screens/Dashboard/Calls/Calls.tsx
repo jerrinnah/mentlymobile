@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,11 +11,38 @@ import CallCard from '../../../components/Calls/CallCard';
 import BigText from '../../../components/SmallText/BigText';
 import RegularText from '../../../components/SmallText/RegularText';
 import Colors from '../../../utils/Colors';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
+// const Item = ({
+//   <CallCard/>
+// })
 
 const Calls = () => {
+  const nav = useNavigation<any>();
+  const [calls, setCalls] = useState();
+
+  // const callData = async () => {
+  //   const response = await axios.post(
+  //     'https://app.mymently.com/mentorship/calls/list-users/2?userType=mentee',
+  //     { userType: 'mentee', id: 3 },
+  //   );
+  //   console.log(response.data.data);
+  // };
+
+  useEffect(() => {
+    axios
+      .get(
+        'https://app.mymently.com/mentorship/calls/list-users/2?userType=mentee',
+    ).then(response => {
+        console.log(response.data.data[0].bootcampId)
+      })
+
+  })
+
   return (
     <SafeAreaView>
-      <View  style={styles.container}>
+      <View style={styles.container}>
         <BigText style={styles.callsTitle}>All Calls</BigText>
 
         <View style={styles.nextCallCard}>
@@ -59,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     // backgroundColor: 'blue',
-    marginTop:30,
+    marginTop: 30,
   },
   subText: {
     marginTop: 40,

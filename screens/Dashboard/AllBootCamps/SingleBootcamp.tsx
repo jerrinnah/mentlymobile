@@ -5,6 +5,8 @@ import {
   View,
   Image,
   Pressable,
+  FlatList,
+  Modal,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -12,19 +14,58 @@ import Colors from '../../../utils/Colors';
 import RegularButton from '../../../components/Buttons/RegularButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { useUser } from '../../../store/store';
+import { useUser, showDetails } from '../../../store/store';
 import BigText from '../../../components/SmallText/BigText';
 import { ScrollView } from 'react-native-gesture-handler';
 import CurIntro from '../../../components/Curriculum/CurIntro';
+import AppliedSuccess from '../../../components/Bootcamps/AppliedSuccess';
+
+const DATA = [
+  {
+    id: 1,
+    title: 'Introduction to photography',
+    week: 1,
+    subtitle:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis enim quae vero sapiente eius reiciendis unde, impedit officia, qui facilis dolorem magni ullam blanditiis, eaque ipsum similique in? Atque, quod?',
+    mentor: 'Phill Jones',
+  },
+  {
+    id: 2,
+    title: 'Backend engineering',
+    week: 1,
+    subtitle:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis enim quae vero sapiente eius reiciendis unde, impedit officia, qui facilis dolorem magni ullam blanditiis, eaque ipsum similique in? Atque, quod?',
+    mentor: 'Phill Jones',
+  },
+  {
+    id: 3,
+    title: 'Introduction to DevOps',
+    week: 1,
+    subtitle:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis enim quae vero sapiente eius reiciendis unde, impedit officia, qui facilis dolorem magni ullam blanditiis, eaque ipsum similique in? Atque, quod?',
+    mentor: 'Phill Jones',
+  },
+  {
+    id: 4,
+    title: 'What you should know',
+    week: 1,
+    subtitle:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis enim quae vero sapiente eius reiciendis unde, impedit officia, qui facilis dolorem magni ullam blanditiis, eaque ipsum similique in? Atque, quod?',
+    mentor: 'Phill Jones',
+  },
+];
+
+type ItemProps = {
+  id: number;
+  title: string;
+  week: string;
+  subtitle: string;
+  mentor: string;
+};
 
 const SingleBootcamp = ({ route, navigation: { goBack } }) => {
   const user = useUser(state => state);
 
-  // const applyHandler=> {
-
-  // }skippT55ed
-
-  const [detail, setDetail] = useState();
   const nav = useNavigation();
 
   // Recieveing the data from bootcampscreen
@@ -67,8 +108,15 @@ const SingleBootcamp = ({ route, navigation: { goBack } }) => {
         phone: user.user.phone,
         bootcampTitle: bootTitle,
       },
-
       // nav.navigate('home')
+    );
+  };
+
+  const Success = () => {
+    return (
+      <View>
+        <Text>Succeeded</Text>
+      </View>
     );
   };
 
@@ -78,88 +126,114 @@ const SingleBootcamp = ({ route, navigation: { goBack } }) => {
   console.log(bootTitle);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.contentColumn}>
-        <Ionicons
-          onPress={goBack}
-          style={styles.arrowBack}
-          name="arrow-back"
-          size={35}
-          color="white"
-        />
+    <>
+      <View style={styles.container}>
+        <View style={styles.contentColumn}>
+          <Ionicons
+            onPress={goBack}
+            style={styles.arrowBack}
+            name="arrow-back"
+            size={35}
+            color="white"
+          />
 
-        <Image style={styles.img} source={{ uri: img }} />
-      </View>
-
-      <View style={styles.textContent}>
-        <Text style={{ fontSize: 30, fontWeight: '700' }}> {bootTitle}</Text>
-        {/* <Text> Organization id: {orgId}</Text> */}
-
-        <View style={styles.textDesc}>
-          <Text>{id}</Text>
-          <Text style={styles.organized}>Organised by: {organizer}</Text>
-          <Text>
-            Lorem ipsum sit amet consectetur, adipisicing elit. Harum dolore
-            perspiciatis assumenda commodi eligendi eius? Beatae eligendi
-            suscipit cumque velit aperiam dolorem inventore. Dolore atque cum
-            odio, sit dolorem error?
-          </Text>
+          <Image style={styles.img} source={{ uri: img }} />
         </View>
 
-        <View style={{ height: 300, justifyContent:'center', alignItems:'center'}}>
-          <ScrollView>
-            <View style={styles.titleBorder}>
-              <BigText style={{ fontSize: 18, color: Colors.NavyBlue100 }}>
-                Overview
-              </BigText>
-            </View>
+        <View style={styles.textContent}>
+          <Text style={{ fontSize: 30, fontWeight: '700' }}> {bootTitle}</Text>
+          {/* <Text> Organization id: {orgId}</Text> */}
 
-            <View style={styles.column}>
-              <View>
-                <View style={styles.infoItem}>
-                  <Text style={styles.subTitle}>Date</Text>
-                  {/* <Text> {date}</Text> */}
-                  <View style={styles.date}>
-                    <Text>{postedDay}-</Text>
-                    <Text>{postedMonth}-</Text>
-                    <Text>{postedYear}</Text>
+          <View style={styles.textDesc}>
+            <Text>{id}</Text>
+            <Text style={{ fontSize: 12 }}>Organised by: {organizer}</Text>
+            <Text>
+              Lorem ipsum sit amet consectetur, adipisicing elit. Harum dolore
+              perspiciatis assumenda commodi eligendi eius? Beatae eligendi
+              suscipit cumque velit aperiam dolorem inventore. Dolore atque cum
+              odio, sit dolorem error?
+            </Text>
+          </View>
+
+          <View style={styles.curContainer}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              bounces={false}
+              style={styles.scrollStyle}
+            >
+              <View style={styles.titleBorder}>
+                <BigText style={{ fontSize: 18, color: Colors.NavyBlue100 }}>
+                  Overview
+                </BigText>
+              </View>
+              <View
+                style={{
+                  minHeight: 100,
+                  paddingBottom: 10,
+                }}
+              >
+                <View style={styles.column}>
+                  <View>
+                    <View style={styles.infoItem}>
+                      <Text style={styles.subTitle}>Date</Text>
+                      {/* <Text> {date}</Text> */}
+                      <View style={styles.date}>
+                        <Text>{postedDay}-</Text>
+                        <Text>{postedMonth}-</Text>
+                        <Text>{postedYear}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.infoItem}>
+                      <Text style={styles.subTitle}>Language</Text>
+                      <Text>English</Text>
+                    </View>
+                    <View style={styles.infoItem}>
+                      <Text style={styles.subTitle}>Bootcamp Type</Text>
+                      <Text>Virtual</Text>
+                    </View>
+                  </View>
+                  <View>
+                    <View style={styles.infoItem}>
+                      <Text style={styles.subTitle}>Time</Text>
+                      <Text>9:00am</Text>
+                    </View>
+                    <View style={styles.infoItem}>
+                      <Text style={styles.subTitle}>Category</Text>
+                      <Text>{category}</Text>
+                    </View>
+                    <View style={styles.infoItem}>
+                      <Text style={styles.subTitle}>Venue</Text>
+                      <Text>{venue}</Text>
+                    </View>
                   </View>
                 </View>
-                <View style={styles.infoItem}>
-                  <Text style={styles.subTitle}>Language</Text>
-                  <Text>English</Text>
-                </View>
-                <View style={styles.infoItem}>
-                  <Text style={styles.subTitle}>Bootcamp Type</Text>
-                  <Text>Virtual</Text>
-                </View>
               </View>
-              <View>
-                <View style={styles.infoItem}>
-                  <Text style={styles.subTitle}>Time</Text>
-                  <Text>9:00am</Text>
-                </View>
-                <View style={styles.infoItem}>
-                  <Text style={styles.subTitle}>Category</Text>
-                  <Text>{category}</Text>
-                </View>
-                <View style={styles.infoItem}>
-                  <Text style={styles.subTitle}>Venue</Text>
-                  <Text>{venue}</Text>
-                </View>
-              </View>
-            </View>
 
-            <View style={styles.curriculumContainer}>
-              <CurIntro/>
-            </View>
-          </ScrollView>
+              <View style={styles.curriculumContainer}>
+                <View style={styles.titleBorder}>
+                  <BigText style={{ fontSize: 18, color: Colors.NavyBlue100 }}>
+                    Curriculum
+                  </BigText>
+                </View>
+
+                <View style={styles.curriculumList}>
+                  <Success/>
+                  <CurIntro />
+                  <CurIntro />
+                  <CurIntro />
+                </View>
+
+                {/* <CurIntro /> */}
+              </View>
+            </ScrollView>
+          </View>
         </View>
-      </View>
 
-      {/* <RegularButton onPress={() => func('hey')}>Apply Here</RegularButton> */}
-      <RegularButton onPress={func}>Apply Here</RegularButton>
-    </View>
+        {/* <RegularButton onPress={() => func('hey')}>Apply Here</RegularButton> */}
+
+        <RegularButton onPress={func}>Apply Here</RegularButton>
+      </View>
+    </>
   );
 };
 
@@ -182,15 +256,15 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   textContent: {
-    paddingTop: 20,
+    // paddingTop: 20,
     padding: 10,
-    height: '60%',
-    // backgroundColor: 'red',
+    height: '65%',
+    // backgroundColor: 'purple',
   },
   contentColumn: {
     flexDirection: 'row',
     width: '100%',
-    // backgroundColor: 'blue',
+    backgroundColor: 'red',
     justifyContent: 'space-between',
   },
   subTitle: {
@@ -199,12 +273,7 @@ const styles = StyleSheet.create({
     color: Colors.NavyBlue100,
     marginBottom: 13,
   },
-  organized: {
-    // top: 10,
-  },
-
   textDesc: {
-    // backgroundColor: 'blue',
     height: 150,
     padding: 10,
     justifyContent: 'space-around',
@@ -212,13 +281,10 @@ const styles = StyleSheet.create({
   column: {
     display: 'flex',
     flexDirection: 'row',
-    // backgroundColor: 'green',
     justifyContent: 'space-between',
-    height: 200,
+    minHeight: 200,
     marginLeft: 40,
     marginRight: 40,
-    marginBottom: 100,
-    // paddingBottom:60,
   },
   infoItem: {
     marginBottom: 10,
@@ -235,23 +301,33 @@ const styles = StyleSheet.create({
 
   titleBorder: {
     height: 40,
-    width: '100%',
     backgroundColor: Colors.Grey400,
     justifyContent: 'center',
     paddingLeft: 20,
     marginBottom: 20,
     marginTop: 20,
-
-
   },
   curriculumContainer: {
-    height: 256,
+    minHeight: 256,
     alignSelf: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'blue', 
-    // margin: 10,
-    // marginBottom: 50,
-    paddingBottom:5,
+  },
+  curContainer: {
+    height: 350,
+    alignItems: 'center',
+  },
+  curriculumList: {
+    minHeight: 350,
+    width: '100%',
+    alignItems: 'center',
+  },
 
+  scrollStyle: {
+    width: '97%',
+  },
+  curLists: {
+    minHeight: 390,
+    backgroundColor: 'red',
+    // padding:10,
   },
 });

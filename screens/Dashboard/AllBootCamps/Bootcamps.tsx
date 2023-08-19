@@ -156,7 +156,7 @@ const Bootcamps = ({route}) => {
                   coverImage={item.coverImage}
                   // createdAt={item.createdAt}
                   createdAt={item.createdAt}
-            
+
                   userCount={item.numOfActiveMentees} orgId={item.orgId} numOfActiveMentees={item.numOfActiveMentees} />
               </Pressable>
             )}

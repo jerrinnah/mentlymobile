@@ -5,6 +5,7 @@ import RegularText from '../SmallText/RegularText';
 import BigText from '../SmallText/BigText';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+
 const CallCard = () => {
   return (
     <TouchableOpacity style={styles.callWidth}>
